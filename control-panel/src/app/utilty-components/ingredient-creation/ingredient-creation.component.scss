@@ -1,0 +1,165 @@
+@import '../../../variables';
+
+.wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	background-color: mat-color($primary, darker);
+	border-radius: 10px;
+	padding: 1rem;
+	width: 75vw;
+	margin-left: auto;
+	margin-right: auto;
+	justify-content: center;
+
+	.break {
+		flex-basis: 100%;
+	}
+
+	table {
+		background-color: mat-color($primary, 600);
+	}
+
+	th, td {
+		text-align: center;
+	}
+
+	form.imported-ingredient-form {
+		display: flex;
+		flex-flow: column wrap;
+
+		button {
+			width: max-content;
+		}
+
+		mat-form-field {
+			color: white;
+		}
+	}
+
+	.ingredient-picker {
+		margin-right: 1rem;
+		width: 60%;
+		flex-grow: 0;
+
+		//.search {
+		//	width: 100%;
+		//	display: flex;
+		//	flex-flow: row nowrap;
+		//
+		//	.searchTerm {
+		//		width: 90%;
+		//		border: 2px solid mat-color($primary);
+		//		border-right: 0;
+		//		padding: 5px;
+		//		border-radius: 0;
+		//		background-color: mat-color($primary, lighter);
+		//		outline: none;
+		//		color: darkslategray;
+		//		font-size: 1.3rem;
+		//	}
+		//
+		//	.searchButton {
+		//		//border: 1px solid mat-color($primary);
+		//		border: 0;
+		//		background: mat-color($primary, darker);
+		//		text-align: center;
+		//		color: #fff;
+		//		border-radius: 0;
+		//		cursor: pointer;
+		//		font-size: 20px;
+		//		outline: none;
+		//	}
+		//}
+
+		.table-container {
+			height: 633px;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+			overflow-y: scroll;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		table {
+			width: 100%;
+		}
+		.mat-column-fdcId {
+			width: 100px;
+		}
+
+		.mat-column-score {
+			width: 30px;
+		}
+
+		.mat-column-description, .mat-column-fdcId {
+			padding-right: 1rem;
+		}
+
+		tr:hover:not(.mat-header-rows), tr.active {
+			background-color: rgba(255,255,255,0.1);
+		}
+	}
+
+	.ingredient-preview {
+		display: flex;
+		flex-flow: column wrap;
+
+		.image-upload {
+			height: 101.5px;
+			display: flex;
+			flex-flow: row wrap;
+			align-items: center;
+
+			input {
+				width: 221px;
+				margin-right: 10px;
+				color: white;
+			}
+		}
+
+		.table-container {
+			height: 633px;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+			width: 381px;
+			overflow-y: scroll;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			table {
+				width: 100%;
+			}
+		}
+
+		img {
+			border-radius: 20%;
+		}
+
+		.mat-column-amount {
+			padding-right: 0.5rem;
+		}
+	}
+
+	.break {
+		flex-basis: 100%;
+		height: 0;
+	}
+
+	button {
+		width: 200px;
+		max-height: 100px;
+		background-color: $button-action-color;
+	}
+
+	.table-container mat-spinner {
+		margin: 10rem auto 0 auto;
+	}
+
+	.wrapper > mat-spinner {
+
+	}
+}

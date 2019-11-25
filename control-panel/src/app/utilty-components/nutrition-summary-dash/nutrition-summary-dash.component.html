@@ -1,0 +1,48 @@
+<div class="diary-summary-container">
+	<header>
+		<div class="header-title">
+			<h2> Your Daily Summary</h2>
+		</div>
+		<span class="spacer"></span>
+		<div class="header-streak">
+			<div class="streak-counter">
+				<h2>
+					{{nutritionData.streak.number}}
+				</h2>
+			</div>
+			<h2 class="streak-description">
+				{{nutritionData.streak.unit}} streak
+			</h2>
+		</div>
+	</header>
+
+	<section class="summary">
+		<div class="calorie-counter">
+			<h3><span class="calorie-header">{{getRemainingCalories()}} </span>calories remaining</h3>
+			<mat-progress-bar [value]="getGoalPercent()" color="accent"></mat-progress-bar>
+		</div>
+		<div class="details">
+			<div class="detail"><h4>Goal</h4>{{nutritionData.calorieData.goal}}</div>
+			<div class="detail"><h4>Eaten</h4>{{nutritionData.calorieData.eaten}}</div>
+			<div class="detail"><h4>Burned</h4>{{nutritionData.calorieData.burned}}</div>
+		</div>
+		<div class="chart-container">
+			<canvas baseChart
+					width="100"
+					[data]="pieChartData"
+					[labels]="pieChartLabels"
+					[chartType]="pieChartType"
+					[legend]="pieChartLegend"
+					[options]="pieChartOptions"
+			></canvas>
+		</div>
+	</section>
+
+	<section class="actions">
+		<div class="actions-wrapper">
+			<button mat-raised-button (click)="openMealDialog()">Add Meal</button>
+			<button mat-raised-button>Add Exercise</button>
+			<button mat-raised-button (click)="openIngredientCreationDialog()">Add Ingredient</button>
+		</div>
+	</section>
+</div>

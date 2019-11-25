@@ -1,0 +1,112 @@
+@import '../../../_variables.scss';
+
+.container {
+	width: 100%;
+	margin: auto;
+
+	mat-button-toggle-group {
+		width: 100%;
+		border: none;
+
+		.mat-button-toggle {
+			margin: 0 0.2rem 0.5rem 0.2rem;
+			transition: 0.5s ease-out;
+			flex: 1;
+			background-color: mat-color($primary, 600);
+
+			&:hover {
+				color: mat-color($accent, 300);
+			}
+		}
+
+		.mat-button-toggle-checked {
+			background-color: $button-action-color;
+
+			&:hover {
+				color: unset;
+			}
+		}
+	}
+
+	.search {
+		width: 90%;
+		margin: auto auto 0.5rem auto;
+		position: relative;
+		display: flex;
+
+		.searchTerm {
+			width: 100%;
+			border: 2px solid mat-color($primary, darker);
+			padding: 5px;
+			border-radius: 5px 0 0 5px;
+			background-color: mat-color($primary, lighter);
+			outline: none;
+			color: darkslategray;
+			font-size: 1.3rem;
+		}
+
+		.searchButton {
+			border: 2px solid mat-color($primary, darker);
+			background: mat-color($primary, darker);
+			text-align: center;
+			color: #fff;
+			border-radius: 0 5px 5px 0;
+			cursor: pointer;
+			font-size: 20px;
+			outline: none;
+		}
+	}
+
+	.food-table {
+		display: flex;
+		flex-flow: column wrap;
+		justify-content: center;
+
+		table, mat-paginator {
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.table-container {
+			height: 521px;
+			overflow-y: scroll;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+		}
+		table {
+			img {
+				height: 42px;
+				margin: 3px auto 3px auto;
+			}
+
+			background-color: mat-color($primary, 600);
+
+			.expanded-row td {
+				border-bottom-width: 0;
+			}
+
+			tr.mat-header-row {
+				height: 40px;
+				background-color: mat-color($primary, 700);
+			}
+
+			tr:hover:not(.ingredient-description-row):not(.expanded-row):not(.mat-header-row) {
+				background-color: rgba(255,255,255,0.1)
+			}
+
+			.hidden {
+				display: none;
+			}
+		}
+
+
+		mat-paginator {
+			background-color: mat-color($primary, 700);
+			height: 56px;
+		}
+	}
+
+}

@@ -1,0 +1,7 @@
+dist/
+node_modules/
+.env
+network.ts
+proxy.json
+manual_work/
+mocks/

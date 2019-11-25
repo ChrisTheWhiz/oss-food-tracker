@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="selector">
+		<mat-select [formControl]="timelineFormControl" [panelClass]="'mat-panel-kek'">
+			<mat-option *ngFor="let option of timelineOptions" [value]="option">{{option}}</mat-option>
+		</mat-select>
+	</div>
+	<div class="chart-container">
+		<canvas baseChart [height]="281"
+				[datasets]="lineChartData"
+				[labels]="lineChartLabels"
+				[legend]="lineChartLegend"
+				[chartType]="lineChartType"
+				[options]="chartOptions"
+				></canvas>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<header class="main-header">
+	<nav>
+		<mat-toolbar>
+			<mat-toolbar-row>
+				<a href="#">Food Logging App</a><!--TODO: find a proper app name-->
+				<span class="navbar-spacer"></span>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" routerLink="">Today</a>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">The past</a>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">My stuff</a>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">Settings</a>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">Log in</a>
+			</mat-toolbar-row>
+		</mat-toolbar>
+	</nav>
+</header>
+<main>
+<!--	<app-today-page></app-today-page>-->
+<!--	<app-diary-add></app-diary-add>-->
+<!--	<app-ingredient-creation></app-ingredient-creation>-->
+	<router-outlet></router-outlet>
+</main>
+
+<app-user-sign [mode]="modeIn"></app-user-sign>
+<app-user-sign [mode]="modeUp"></app-user-sign>
+<!--<app-login-mock></app-login-mock>-->
+<!--<app-diary-summary-mock></app-diary-summary-mock>-->
+<!--<app-history-viewer-mock></app-history-viewer-mock>-->
+<!--<app-food-add-mock></app-food-add-mock>-->
+<!--<app-period-summary-mock></app-period-summary-mock>-->

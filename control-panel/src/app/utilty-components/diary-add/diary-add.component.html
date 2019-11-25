@@ -1,0 +1,6 @@
+<div class="modal-container">
+	<header><h2>Click an ingredient to open adding menu</h2></header>
+	<app-food-table></app-food-table>
+	<app-basket></app-basket>
+	<button mat-button (click)="closeDialog()" [disabled]="basketService.basket.length === 0">Submit Meal</button>
+</div>

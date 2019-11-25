@@ -1,0 +1,17 @@
+@import '../variables';
+
+mat-toolbar {
+	background-color: mat-color($primary, 600);
+}
+
+.navbar-spacer {
+	flex: 1 1 auto;
+}
+
+.main-header a {
+	margin: 0 0.7rem;
+
+	&.active {
+		color: mat-color($accent, 300);
+	}
+}

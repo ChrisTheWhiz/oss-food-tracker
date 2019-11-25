@@ -1,0 +1,49 @@
+<div class="container">
+	<header><h2>{{ingredientInstance?.description}}</h2></header>
+	<main>
+<!--		<img *ngIf="ingredientInstance.image" [src]="sanitizer.bypassSecurityTrustUrl(convertStringToBase64stuff(ingredientInstance.image))">-->
+<!--		<h3 *ngIf="ingredientInstance.image"> {{convertStringToBase64stuff(ingredientInstance.image)}}</h3>-->
+		<div class="chart-container">
+			<canvas baseChart height="100" width="100"
+					[data]="pieChartData"
+					[labels]="pieChartLabels"
+					[chartType]="pieChartType"
+					[legend]="pieChartLegend"
+			></canvas>
+		</div>
+		<div class="ingredient-info-grid">
+			<ul class="macro-info">
+				<li>Protein: {{ingredientInstance?.nutrition[0].amount}}</li>
+				<li>Carbs: {{ingredientInstance?.nutrition[2].amount}}</li>
+				<li>Fat: {{ingredientInstance?.nutrition[1].amount}}</li>
+				<li><h6>20 nutrients <a href="#">View Sheet</a></h6></li>
+			</ul>
+		</div>
+		<form class="ingredient-config" (ngSubmit)="addIngredientToBasket()">
+			<mat-form-field>
+				<mat-label>Meal</mat-label>
+				<mat-select [(ngModel)]="meal" name="mealType">
+					<mat-option [value]="'breakfast'">Breakfast</mat-option>
+					<mat-option [value]="'lunch'">Lunch</mat-option>
+					<mat-option [value]="'dinner'">Dinner</mat-option>
+					<mat-option [value]="'snack'">Snack</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<div class="quantity-config">
+				<mat-form-field>
+					<mat-label>Serving type</mat-label>
+					<mat-select [(ngModel)]="servingType" name="servingType">
+						<mat-option [value]="'gram'">Gram</mat-option>
+						<mat-option [value]="'serving'">Serving</mat-option>
+						<mat-option [value]="'ounce'">Ounce</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field>
+					<mat-label>Size</mat-label>
+					<input matInput [(ngModel)]="quantity" type="number" autocomplete="off" name="mealSize">
+				</mat-form-field>
+			</div>
+			<button mat-stroked-button color="primary" type="submit">Add</button>
+		</form>
+	</main>
+</div>

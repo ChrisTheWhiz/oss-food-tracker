@@ -1,0 +1,62 @@
+@import "../../../variables";
+
+.preview-container {
+	margin-top: 2rem;
+	color: inherit;
+	padding: 1rem 1rem 0 1rem;
+	width: 100%;
+	text-align: center;
+	background-color: mat-color($primary, 400);
+	border-radius: 10px;
+
+	ul.basket-container {
+		display: flex;
+		flex-flow: column nowrap;
+		padding-left: 0;
+		margin-bottom: 0;
+
+		li {
+			list-style: none;
+			border-radius: 10px;
+			background-color: mat-color($primary, 600);
+			width: 100%;
+			margin-bottom: 1rem;
+			padding: 0.5rem;
+
+			h4 {
+				text-align: left;
+				margin-bottom: 0;
+			}
+			.quantity-preview {
+				display: flex;
+				flex-flow: row wrap;
+				margin-top: -10px;
+				align-items: flex-end;
+
+				mat-form-field {
+					margin-right: 1rem;
+					height: 50px;
+				}
+
+				img {
+					height: 42px;
+					margin-top: 0.5rem;
+				}
+
+				.spacer {
+					flex: 1 1 auto;
+				}
+
+				button {
+					margin-right: 1rem;
+					background-color: $button-action-color;
+					border-radius: 10px;
+
+					&.remove {
+						background-color: desaturate(red, 50);
+					}
+				}
+			}
+			}
+	}
+}

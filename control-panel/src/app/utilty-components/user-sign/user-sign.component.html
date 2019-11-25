@@ -1,0 +1,45 @@
+<div class="container">
+	<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="status==='pending'">
+<!--		<mat-form-field floatLabel="always" class="example-full-width" >-->
+<!--			<mat-label>Name</mat-label>-->
+<!--			<input matInput type="text" placeholder="John Doe" [formControl]="name">-->
+<!--			<mat-icon matPrefix>emoji_people</mat-icon>-->
+<!--			<mat-error> Field is missing or you don't have at least 2 words</mat-error>-->
+<!--		</mat-form-field>-->
+<!--		<mat-form-field floatLabel="always" class="example-full-width" >-->
+<!--			<mat-label>Username</mat-label>-->
+<!--			<input matInput type="text" placeholder="johnDoes49" [formControl]="username">-->
+<!--			<mat-icon matPrefix>account_circle</mat-icon>-->
+<!--			<mat-error> Field is missing</mat-error>-->
+<!--		</mat-form-field>-->
+<!--		<mat-form-field floatLabel="always" class="example-full-width" >-->
+<!--			<mat-label>Email</mat-label>-->
+<!--			<input matInput type="text" placeholder="john.doe@gmail.com" [formControl]="email">-->
+<!--			<mat-icon matPrefix>email</mat-icon>-->
+<!--			<mat-error> Field is missing is not a valid email address</mat-error>-->
+<!--		</mat-form-field>-->
+<!--		<mat-form-field floatLabel="always" class="example-full-width" >-->
+<!--			<mat-label>Password</mat-label>-->
+<!--			<input matInput type="password" [formControl]="password">-->
+<!--			<mat-icon matPrefix>lock</mat-icon>-->
+<!--			<mat-error> Field is missing or does not have 6 characters</mat-error>-->
+<!--		</mat-form-field>-->
+<!--		<mat-form-field floatLabel="always" class="example-full-width" >-->
+<!--			<mat-label>Password Again</mat-label>-->
+<!--			<input matInput type="password2" [formControl]="password2">-->
+<!--			<mat-icon matPrefix>lock</mat-icon>-->
+<!--			<mat-error> Field is missing or does not have 6 characters</mat-error>-->
+<!--		</mat-form-field>-->
+		<mat-form-field floatLabel="always" *ngFor="let question of formModel">
+			<mat-label>{{question.label}}</mat-label>
+			<input matInput [type]="question.inputType" [formControlName]="question.key" [placeholder]="question.placeholder">
+			<mat-icon matPrefix>{{question.prefixIcon}}</mat-icon>
+			<mat-error>{{question.errorMessages}}</mat-error>
+		</mat-form-field>
+
+		<button mat-raised-button color="primary" type="submit">Kekus Magicus Submitus</button>
+	</form>
+	<div class="message">
+		{{status | json}}
+	</div>
+</div>

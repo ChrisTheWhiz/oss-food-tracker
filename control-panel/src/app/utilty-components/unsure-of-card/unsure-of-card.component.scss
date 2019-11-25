@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.container {
+	background-color: mat-color($primary);
+	border-radius: 10px;
+	padding: 0 1rem;
+	height: 306.38px;
+	min-width: 400px;
+	width: 30vw;
+	color: mat-color($foreground, base);
+	overflow: scroll;
+	margin: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

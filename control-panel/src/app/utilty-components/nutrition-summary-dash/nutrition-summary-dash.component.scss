@@ -1,0 +1,132 @@
+@import '../../../variables';
+
+.diary-summary-container {
+	min-width: 395px;
+	width: 30vw;
+
+	border-radius: 10px;
+	overflow: hidden;
+	color: mat-color($foreground, base);
+
+
+	header {
+		background-color: mat-color($primary, 600);
+		color: inherit;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		padding: 0.2rem 1rem;
+
+		.spacer {
+			flex: 1 1 auto;
+		}
+		h2 {
+			margin-bottom: 0; //overriding h2's for this widget
+		}
+
+		.header-title {
+
+		}
+
+		.header-streak {
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: flex-end;
+			align-items: center;
+
+			.streak-counter {
+				display: flex;
+				h2 {
+					font-size: 2rem;
+					line-height: 2rem;
+					color: mat-color($accent);
+					//margin-left: 0;
+					//margin-right: 0.5rem;
+					margin: auto 0.5rem auto auto;
+				}
+			}
+
+			h2.streak-description {
+				font-size: 1rem;
+				width: 61px;
+				line-height: 1rem;
+				vertical-align: center;
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+	}
+
+
+	section.summary {
+		background-color: mat-color($primary);
+		padding: 1rem;
+		color: inherit;
+		display: grid;
+		grid-template-columns: 60% 40%;
+		grid-template-areas: "header chart" "details chart";
+
+		.calorie-counter {
+			grid-area: header;
+
+			.calorie-header {
+				font-size: 2rem;
+				color: mat-color($accent);
+
+			}
+		}
+
+		.details {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			grid-area: details;
+
+			.detail {
+				margin-top: 1rem;
+				margin-left: 0.1rem;
+				margin-right: 0.1rem;
+
+				h4 {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.chart-container {
+			grid-area: chart;
+			//width: 130%;
+			margin-top: 1rem;
+			position: relative;
+		}
+	}
+
+	section.actions {
+		background-color: mat-color($primary, 400);
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		padding: 0.5rem;
+
+		.actions-wrapper {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+			margin: -0.5rem;
+
+			button {
+				margin: 0.5rem 0.5rem;
+				flex: 1 1 auto;
+				color: white;
+				background-color: $button-action-color;
+
+				&:first-child {
+					margin-right: 0;
+				}
+
+				&:last-child {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+}

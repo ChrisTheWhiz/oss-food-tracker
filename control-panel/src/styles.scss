@@ -1,0 +1,59 @@
+// Theming
+@import 'variables';
+
+@include mat-core();
+@include angular-material-theme($my-theme);
+
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+// Settings
+app-root a {
+	color: mat-color($foreground, base);
+	text-decoration: none;
+	transition: ease-out 0.2s;
+
+	&:hover {
+		color: mat-color($accent, 300);
+		text-decoration: none;
+	}
+}
+
+h2, h3, h4 {
+	font-weight: 500;
+}
+
+body {
+	background-color: #e0e0f5 !important;
+}
+
+html {
+	font-size: 16px;
+}
+
+.mat-panel-kek.mat-select-panel {
+	background-color: mat-color($primary, 700);
+}
+
+
+mat-dialog-container {
+	padding: 0 !important;
+	border-radius: 10px !important;
+	&::-webkit-scrollbar {
+		display: none !important;
+	}
+}
+
+.cdk-overlay-pane {
+	border-radius: 10px !important;
+}
+
+.add-food-dialog {
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	&::-webkit-scrollbar {
+		display: none !important;
+	}
+}
