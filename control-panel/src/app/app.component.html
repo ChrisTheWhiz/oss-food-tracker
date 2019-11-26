@@ -4,21 +4,25 @@
 			<mat-toolbar-row>
 				<a href=""><h3>Food Logging App</h3></a><!--TODO: find a proper app name-->
 				<span class="navbar-spacer"></span>
-				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" routerLink="/today">Today</a>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}"
+				   routerLink="/today">Today</a>
 				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">The past</a>
 				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">My stuff</a>
 				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">Settings</a>
-				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" routerLink="/login" *ngIf="!authService.currentUserValue">Log in/Sign up</a>
-<!--				<a (click)="openSigningModal()" *ngIf="!authService.currentUserValue">Log in/Sign up</a>-->
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}"
+				   [routerLink]="[ {outlets: { modal: 'login' } } ]"
+				   		*ngIf="!authService.currentUserValue">Log in/Sign
+					up</a>
 				<a (click)="authService.logout()" *ngIf="authService.currentUserValue" href="">Log out</a>
 			</mat-toolbar-row>
 		</mat-toolbar>
 	</nav>
 </header>
 <main>
-<!--	<app-today-page></app-today-page>-->
-<!--	<app-diary-add></app-diary-add>-->
-<!--	<app-ingredient-creation></app-ingredient-creation>-->
+	<router-outlet name="modal"></router-outlet>
+	<!--	<app-today-page></app-today-page>-->
+	<!--	<app-diary-add></app-diary-add>-->
+	<!--	<app-ingredient-creation></app-ingredient-creation>-->
 	<router-outlet></router-outlet>
 </main>
 

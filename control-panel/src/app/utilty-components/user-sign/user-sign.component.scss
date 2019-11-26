@@ -1,11 +1,20 @@
 @import '../../../variables';
 
 .container {
-	margin: auto;
 	background-color: mat-color($primary);
+	z-index: 10;
 	width: 32vw;
 	border-radius: 10px;
 	padding: 1rem 1rem 0 1rem;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+
+	button[mat-mini-fab] {
+		float: right;
+	}
 
 	.example-form {
 		width: 100%;

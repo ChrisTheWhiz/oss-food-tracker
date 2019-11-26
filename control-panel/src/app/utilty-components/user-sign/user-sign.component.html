@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container mat-elevation-z15">
+	<button mat-mini-fab color="warn" class="mat-elevation-z1" (click)="closeModal('pressed close button')"><mat-icon>close</mat-icon></button>
 	<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 		<mat-form-field floatLabel="always" color="accent" *ngFor="let question of formModel">
 			<mat-label>{{question.label}}</mat-label>

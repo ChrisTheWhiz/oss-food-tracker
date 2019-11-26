@@ -52,8 +52,15 @@ export const registrationHandler = (req: Request, res: Response) => {
 					.then((hash) => {
 						newUser.password = hash;
 						newUser.save()
-						.then(() => {
-							res.send({status: 'success'});
+						// it's not actually shadowed because the path where we declare a user variable and it exists ends the function
+						// tslint:disable-next-line:no-shadowed-variable
+						.then((user) => {
+							const token = sign(user.toObject(), databaseConfig.secret, {expiresIn: 60480});
+							res.send({
+								status: 'success',
+								token: 'JWT ' + token,
+								user
+							});
 						})
 						.catch((e: Error) => {
 							console.log(e);
@@ -91,6 +98,7 @@ export const loginHandler = (req: Request, res: Response) => {
 					});
 				} else {
 					const token = sign(user, databaseConfig.secret, {expiresIn: 60480});
+					// console.log(user);
 					res.send({
 						status: 'success',
 						token: 'JWT ' + token,

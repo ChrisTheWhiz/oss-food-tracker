@@ -17,7 +17,7 @@ export class AuthGuardService implements CanActivate {
 		if (currentUser) {
 			return true;
 		} else {
-			this.router.navigate(['/login'])
+			this.router.navigate([ {outlets: { modal: 'login' } } ])
 			.catch((e) => {
 				console.log('error sending prospector back to login:');
 				console.log(e);

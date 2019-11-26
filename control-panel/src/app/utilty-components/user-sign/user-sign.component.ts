@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FORM_MODE, getFormModel, passwordsMustMatchValidator, QuestionModel} from './user-sign.model';
 import {AuthService} from '../../services/auth.service';
@@ -25,6 +25,11 @@ export class UserSignComponent implements OnInit {
 	// @Input() mode: FORM_MODE;
 	mode: FORM_MODE;
 
+	@Output() modalClose: EventEmitter<any> = new EventEmitter<any>();
+	@HostListener('document:keydown.escape', ['$event']) onEscHandler(event: KeyboardEvent) {
+		this.closeModal('escape pressed');
+	}
+
 	constructor(
 		private fb: FormBuilder,
 		private authService: AuthService,
@@ -33,6 +38,8 @@ export class UserSignComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		// a bit tricky, but since we init the form with switchMode(), we'll want to initialize this.mode with the *opposite* value of what we need
+		this.mode = this.authService.checkIfHasBeenLogged() ? FORM_MODE.up : FORM_MODE.in;
 		this.switchMode();
 	}
 
@@ -40,9 +47,9 @@ export class UserSignComponent implements OnInit {
 		if (this.mode === FORM_MODE.up) {
 			this.authService.register(this.form.value)
 			.subscribe((result) => {
-				console.log(result);
+				// console.log(result);
 				if (result.status === 'success') {
-					this.switchMode();
+					this.closeModal('closed registration');
 				} else {
 					alert(result.status.toLocaleUpperCase() + ' - ' + result.message);
 				}
@@ -51,12 +58,7 @@ export class UserSignComponent implements OnInit {
 			this.authService.login(this.form.value.usernameOrEmail, this.form.value.password)
 			.subscribe((result) => {
 				if (result.status === 'success') {
-					this.form.reset();
-					this.router.navigate(['/today'])
-					.catch((e) => {
-						console.log('error navigating');
-						throw e;
-					});
+					this.closeModal('closed login');
 				} else {
 					alert(result.status.toLocaleUpperCase() + ' - ' + result.message);
 				}
@@ -89,5 +91,10 @@ export class UserSignComponent implements OnInit {
 		} else {
 			this.form = this.fb.group(controls);
 		}
+	}
+
+	closeModal($event) {
+		this.router.navigate([{outlets: {modal: null}}]);
+		this.modalClose.next($event);
 	}
 }

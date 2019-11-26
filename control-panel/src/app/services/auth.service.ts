@@ -40,9 +40,11 @@ export class AuthService {
 		return this.httpClient.post<any>('/users/login', {usernameOrEmail: username, password})
 		.pipe(
 			map((response: { status: string, token?: string, user?: User, message?: string }) => {
+				// console.log(response.user);
 				if (response.user) {
 					localStorage.setItem('currentUser', JSON.stringify(response.user));
 					this.currentUserSubject.next(response.user);
+					this.createBeenLoggedEntryInLocalStorage();
 				}
 				return response;
 			})
@@ -61,15 +63,28 @@ export class AuthService {
 		.pipe(
 			map((response: { status: string, user: User, message: Array<{ msg: string }> }) => {
 				if (response.status !== 'success') {
-					const newMessage = response.message.map((mess) => {
-						return mess.msg;
-					}).join(';');
-					return {status: response.status, message: newMessage, user: response.user};
+					// console.log(response);
+					return response;
 				} else {
+					localStorage.setItem('currentUser', JSON.stringify(response.user));
+					this.currentUserSubject.next(response.user);
+					this.createBeenLoggedEntryInLocalStorage();
 					return response;
 				}
 			})
 		);
+	}
+
+	createBeenLoggedEntryInLocalStorage() {
+		const beenLogged = localStorage.getItem('beenLogged');
+		if (!beenLogged) {
+			localStorage.setItem('beenLogged', 'true');
+		}
+	}
+
+	checkIfHasBeenLogged(): boolean {
+		const beenLogged = localStorage.getItem('beenLogged');
+		return beenLogged === 'true';
 	}
 }
 
