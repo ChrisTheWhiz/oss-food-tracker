@@ -19,7 +19,6 @@ import {HistoryChartComponent} from './utilty-components/history-chart/history-c
 import {UnsureOfCardComponent} from './utilty-components/unsure-of-card/unsure-of-card.component';
 import {DiaryAddComponent} from './utilty-components/diary-add/diary-add.component';
 import {FoodTableComponent} from './utilty-components/food-table/food-table.component';
-import {CoursesService} from './services/courses.service';
 import {HttpClientModule} from '@angular/common/http';
 import {IngredientsService} from './services/ingredients.service';
 import {IngredientEditorComponent} from './utilty-components/ingredient-editor/ingredient-editor.component';
@@ -30,7 +29,6 @@ import {ImageService} from './services/image.service';
 import {Ng2ImgMaxModule} from 'ng2-img-max';
 import {ConversionsUtil} from './utils/conversions.util';
 import {UserSignComponent} from './utilty-components/user-sign/user-sign.component';
-import {UserOpsService} from './services/user-ops.service';
 
 @NgModule({
 	declarations: [
@@ -62,7 +60,7 @@ import {UserOpsService} from './services/user-ops.service';
 		HttpClientModule,
 		Ng2ImgMaxModule
 	],
-	providers: [DataProviderService, IngredientsService, MealBasketService, ImageService, ConversionsUtil, UserOpsService],
+	providers: [DataProviderService, IngredientsService, MealBasketService, ImageService, ConversionsUtil],
 	bootstrap: [AppComponent],
 	entryComponents: [DiaryAddComponent, IngredientCreationComponent]
 })

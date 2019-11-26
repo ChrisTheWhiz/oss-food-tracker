@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ImageService} from '../../services/image.service';
 import {Ng2ImgMaxService} from 'ng2-img-max';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Ingredient} from '../../models/ingredient';
 import {IngredientsService} from '../../services/ingredients.service';
 
 
@@ -38,7 +37,11 @@ export class IngredientCreationComponent implements OnInit {
 				reader.readAsDataURL(result);
 				// @ts-ignore
 				reader.onload = () => {
-					this.base64img = reader.result;
+					if (reader.result) {
+						this.base64img = reader.result;
+					} else {
+						throw new Error('Reading new ingredient image failed in ingredient-creation.components.ts');
+					}
 					this.imageService.uploadImage(this.base64img)
 					.subscribe((next) => {
 						this.message = next;
@@ -50,10 +53,6 @@ export class IngredientCreationComponent implements OnInit {
 				console.log('😢 Oh no!', error);
 			}
 		);
-	}
-
-	loadIngredient(fdcId: string) {
-
 	}
 
 	submitForm(description: string) {

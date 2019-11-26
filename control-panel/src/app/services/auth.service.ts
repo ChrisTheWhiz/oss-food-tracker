@@ -17,20 +17,22 @@ interface User {
 })
 export class AuthService {
 
-	private currentUserSubject: BehaviorSubject<User>;
-	public currentUser: Observable<User>;
+	private currentUserSubject: BehaviorSubject<User | null>;
+	public currentUser: Observable<User | null>;
 
 	constructor(private httpClient: HttpClient) {
 		const localUser = localStorage.getItem('currentUser');
-		if (localUser === 'undefined' || localUser === 'null') {
-			localStorage.removeItem('currentUser');  // this might not be needed anymore after some fixes... TODO: delete on 1st Dec if never occurs
+		if (localUser === 'undefined' || localUser === 'null' || localUser == null) {
+			localStorage.removeItem('currentUser');
+			this.currentUserSubject = new BehaviorSubject<User | null>(null);
+			this.currentUser = this.currentUserSubject.asObservable();
 		} else if (localUser) {
 			this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localUser));
 			this.currentUser = this.currentUserSubject.asObservable();
 		}
 	}
 
-	public get currentUserValue(): User {
+	public get currentUserValue(): User | null {
 		return this.currentUserSubject.value;
 	}
 

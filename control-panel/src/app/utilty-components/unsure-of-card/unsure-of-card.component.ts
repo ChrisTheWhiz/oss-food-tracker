@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {UserOpsService} from '../../services/user-ops.service';
 
 @Component({
 	selector: 'app-unsure-of-card',
@@ -10,20 +9,10 @@ export class UnsureOfCardComponent implements OnInit {
 
 	status: any;
 
-	constructor(public userOps: UserOpsService) {
+	constructor() {
 	}
 
 	ngOnInit() {
 	}
 
-	getMeals() {
-		this.userOps.getMeals()
-		.subscribe((res) => {
-			this.status = res;
-		});
-	}
-
-	debug_logout() {
-		this.userOps.clearLoginSession();
-	}
 }

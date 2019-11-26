@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserOpsService} from '../../services/user-ops.service';
 import {FORM_MODE, getFormModel, passwordsMustMatchValidator, QuestionModel} from './user-sign.model';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -28,7 +27,6 @@ export class UserSignComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private userOps: UserOpsService,
 		private authService: AuthService,
 		private router: Router
 	) {

@@ -88,7 +88,7 @@ const signUpFormModel: QuestionModel[] = [
 export function getFormModel(formMode: FORM_MODE): QuestionModel[] {
 	if (formMode === FORM_MODE.in) {
 		return signInFormModel;
-	} else if (formMode === FORM_MODE.up) {
+	} else { // is mode = up
 		return signUpFormModel;
 	}
 }
