@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserOpsService} from '../../services/user-ops.service';
 import {FORM_MODE, getFormModel, QuestionModel} from './user-sign.model';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -21,12 +22,18 @@ export class UserSignComponent implements OnInit {
 	formModel: QuestionModel[];
 	status = 'pending';
 
-	@Input() mode: FORM_MODE;
+	// @Input() mode: FORM_MODE;
+	mode: FORM_MODE;
 
-	constructor(private fb: FormBuilder, private userOps: UserOpsService) {
+	constructor(
+		private fb: FormBuilder,
+		private userOps: UserOpsService,
+		private authService: AuthService
+	) {
 	}
 
 	ngOnInit() {
+		this.mode = FORM_MODE.in;
 		this.formModel = getFormModel(this.mode);
 		this.form = this.fb.group({});
 		this.formModel
@@ -37,20 +44,20 @@ export class UserSignComponent implements OnInit {
 
 	onSubmit() {
 		if (this.mode === FORM_MODE.up) {
-			this.userOps.registerUser(this.form.value)
-			.subscribe((result: any) => {
-				// console.log(result);
+			this.authService.register(this.form.value)
+			.subscribe((result) => {
 				this.status = result;
 			});
-			this.form.reset();
 		} else if (this.mode === FORM_MODE.in) {
-			// console.log(this.form.value);
-			this.userOps.logUser(this.form.value)
-			.subscribe((result: any) => {
-				// console.log(result);
-				this.userOps.storeLoginSession(result.token);
-				this.status = result;
+
+			this.authService.login(this.form.value.usernameOrEmail, this.form.value.password)
+			.subscribe((result) => {
+				if (result) {
+					this.status = 'Logged in!';
+				}
 			});
 		}
+
+		this.form.reset(); // TODO only reset when form is valid
 	}
 }
