@@ -4,7 +4,7 @@
 // mat-palette accepts $palette-name, main, lighter and darker variants
 $primary: mat-palette($mat-teal);
 $accent: mat-palette($mat-amber);
-$warn: mat-palette($mat-deep-orange, A200);
+$warn: mat-palette($mat-deep-orange, A400);
 
 $my-theme: mat-dark-theme(
 		$primary,

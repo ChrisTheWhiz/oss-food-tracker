@@ -1,11 +1,11 @@
 @import '../../../variables';
 
 .container {
+	margin: auto;
 	background-color: mat-color($primary);
 	width: 32vw;
 	border-radius: 10px;
-	margin-left: 3rem; // this is just for early development
-	padding: 1rem;
+	padding: 1rem 1rem 0 1rem;
 
 	.example-form {
 		width: 100%;
@@ -17,18 +17,22 @@
 
 	mat-form-field {
 		width: 100%;
+		margin-bottom: 0.5rem;
+
+		&:last-of-type {
+			margin-bottom: 1rem;
+		}
+		input {
+			color: white;
+		}
+
+		mat-icon {
+			color: white
+		}
 	}
 
 	button {
 		background-color: $button-action-color;
-		margin: auto;
-	}
-
-	.message {
-		margin: auto;
-		text-align: center;
-		vertical-align: center;
-		color: white;
-		font-size: 2rem;
+		margin: auto auto 1rem auto;
 	}
 }

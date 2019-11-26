@@ -8,7 +8,8 @@
 				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">The past</a>
 				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">My stuff</a>
 				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" href="#">Settings</a>
-				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" routerLink="/login" *ngIf="!authService.currentUserValue">Log in</a>
+				<a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{'exact': true}" routerLink="/login" *ngIf="!authService.currentUserValue">Log in/Sign up</a>
+<!--				<a (click)="openSigningModal()" *ngIf="!authService.currentUserValue">Log in/Sign up</a>-->
 				<a (click)="authService.logout()" *ngIf="authService.currentUserValue" href="">Log out</a>
 			</mat-toolbar-row>
 		</mat-toolbar>

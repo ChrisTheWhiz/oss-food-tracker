@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {FORM_MODE} from './utilty-components/user-sign/user-sign.model';
 import {AuthService} from './services/auth.service';
+import {MatDialog} from '@angular/material';
+import {UserSignComponent} from './utilty-components/user-sign/user-sign.component';
 
 @Component({
 	selector: 'app-root',
@@ -8,9 +9,13 @@ import {AuthService} from './services/auth.service';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	constructor(public authService: AuthService) {
+	constructor(public authService: AuthService, public dialog: MatDialog) {
 	}
 
 	title = 'control-panel';
 
+	openSigningModal() {
+		const dialogRef = this.dialog.open(UserSignComponent, {
+		});
+}
 }

@@ -57,3 +57,12 @@ mat-dialog-container {
 		display: none !important;
 	}
 }
+
+
+.mat-form-field-label mat-label {
+	font-size: 16px;
+}
+
+mat-error {
+	font-size: 16px;
+}

@@ -1,4 +1,4 @@
-import {ValidatorFn, Validators} from '@angular/forms';
+import {FormGroup, ValidatorFn, Validators} from '@angular/forms';
 
 export enum FORM_MODE {
 	up = 'up',
@@ -8,7 +8,7 @@ export enum FORM_MODE {
 export interface QuestionModel {
 	placeholder: string | null;
 	prefixIcon: string;
-	errorMessages: string[];
+	errorMessages: string[] | { [key: string]: string };
 	validators: ValidatorFn[];
 	inputType: string;
 	label: string;
@@ -19,7 +19,7 @@ const signInFormModel: QuestionModel[] = [
 	{
 		placeholder: 'JoeWithDough50',
 		prefixIcon: 'emoji_people',
-		errorMessages: ['Field is missing or you don\'t have at least 2 words'],
+		errorMessages: {required: 'No username provided'},
 		validators: [Validators.required], // TODO add validators for username/password
 		inputType: 'text',
 		label: 'Username Or Email',
@@ -28,7 +28,7 @@ const signInFormModel: QuestionModel[] = [
 	{
 		placeholder: 'tomato6avocados',
 		prefixIcon: 'lock',
-		errorMessages: ['Field is missing or does not have 6 characters'],
+		errorMessages: {required: 'No password given', minlength: 'Password does not have 6 characters'},
 		validators: [Validators.required, Validators.minLength(6)],
 		inputType: 'password',
 		label: 'Password',
@@ -40,8 +40,8 @@ const signUpFormModel: QuestionModel[] = [
 	{
 		placeholder: 'Clementine Cerise',
 		prefixIcon: 'emoji_people',
-		errorMessages: [' Field is missing or you don\'t have at least 2 words'],
-		validators: [Validators.required, Validators.pattern(/ /)],
+		errorMessages: {required: 'No name provided', pattern: 'You need to have at least a name and surname'},
+		validators: [Validators.required, Validators.pattern(/ \w/)],
 		inputType: 'text',
 		label: 'Name',
 		key: 'name',
@@ -49,7 +49,7 @@ const signUpFormModel: QuestionModel[] = [
 	{
 		placeholder: 'tomato6avocados',
 		prefixIcon: 'lock',
-		errorMessages: ['Field is missing or does not have 6 characters'],
+		errorMessages: {required: 'Field is missing', minlength: 'does not have 6 characters'},
 		validators: [Validators.required, Validators.minLength(6)],
 		inputType: 'password',
 		label: 'Password',
@@ -58,8 +58,8 @@ const signUpFormModel: QuestionModel[] = [
 	{
 		placeholder: 'tomato6avocados',
 		prefixIcon: 'lock',
-		errorMessages: ['The passwords do not match'],
-		validators: [Validators.required],
+		errorMessages: {mustmatch: 'The passwords do not match'},
+		validators: [/* Custom validator that acts at group level is used here */],
 		inputType: 'password',
 		label: 'Password again',
 		key: 'password2',
@@ -67,16 +67,16 @@ const signUpFormModel: QuestionModel[] = [
 	{
 		placeholder: 'JoeWithDough50',
 		prefixIcon: 'account_circle',
-		errorMessages: ['Field is missing'],
+		errorMessages: {required: 'Field is missing'},
 		validators: [Validators.required],
 		inputType: 'text',
 		label: 'Username',
 		key: 'username',
 	},
 	{
-		placeholder: 'chip.dulce@breakfast.fig',
+		placeholder: 'chip.fish@breakfast.fig',
 		prefixIcon: 'email',
-		errorMessages: [' Field is missing is not a valid email address'],
+		errorMessages: {required: ' Field is missing', email: '¡That is not a valid email address¡'},
 		validators: [Validators.required, Validators.email],
 		inputType: 'email',
 		label: 'Email',
@@ -91,4 +91,20 @@ export function getFormModel(formMode: FORM_MODE): QuestionModel[] {
 	} else if (formMode === FORM_MODE.up) {
 		return signUpFormModel;
 	}
+}
+
+export function passwordsMustMatchValidator(controlName: string, matchingControlName: string) {
+	return (formGroup: FormGroup) => {
+		const control = formGroup.controls[controlName];
+		const matchingControl = formGroup.controls[matchingControlName];
+
+		if (matchingControl.errors && !matchingControl.errors.mustmatch) {
+			return;
+		}
+		if (matchingControl.value !== control.value) {
+			control.setErrors({mustmatch: true});
+		} else {
+			control.setErrors(null);
+		}
+	};
 }

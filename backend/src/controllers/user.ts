@@ -31,9 +31,9 @@ export const registrationHandler = (req: Request, res: Response) => {
 		.then((user) => {
 			if (user) {
 				// UserModel exists
-				errors.push({msg: 'UserModel is already registered!'});
+				errors.push({msg: 'User is already registered!'});
 				res.send({
-					status: 'user_error',
+					status: 'error',
 					message: errors
 				});
 			} else {
@@ -78,7 +78,7 @@ export const loginHandler = (req: Request, res: Response) => {
 	.then((user) => {
 		if (!user) {
 			res.send({
-				status: 'fail',
+				status: 'error',
 				message: 'user not found'
 			});
 		} else {
@@ -86,7 +86,7 @@ export const loginHandler = (req: Request, res: Response) => {
 			.then((isMatch) => {
 				if (!isMatch) {
 					res.send({
-						status: 'fail',
+						status: 'error',
 						message: 'wrong password'
 					});
 				} else {
