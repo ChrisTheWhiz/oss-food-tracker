@@ -19,7 +19,7 @@ import {HistoryChartComponent} from './utilty-components/history-chart/history-c
 import {UnsureOfCardComponent} from './utilty-components/unsure-of-card/unsure-of-card.component';
 import {DiaryAddComponent} from './utilty-components/diary-add/diary-add.component';
 import {FoodTableComponent} from './utilty-components/food-table/food-table.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {IngredientsService} from './services/ingredients.service';
 import {IngredientEditorComponent} from './utilty-components/ingredient-editor/ingredient-editor.component';
 import {BasketComponent} from './utilty-components/basket/basket.component';
@@ -29,6 +29,9 @@ import {ImageService} from './services/image.service';
 import {Ng2ImgMaxModule} from 'ng2-img-max';
 import {ConversionsUtil} from './utils/conversions.util';
 import {UserSignComponent} from './utilty-components/user-sign/user-sign.component';
+import {AuthInterceptorService} from './services/auth-interceptor.service';
+import {ErrorInterceptorService} from './services/error-interceptor.service';
+import {CreateMealComponent} from './utilty-components/create-meal/create-meal.component';
 
 @NgModule({
 	declarations: [
@@ -47,7 +50,8 @@ import {UserSignComponent} from './utilty-components/user-sign/user-sign.compone
 		IngredientEditorComponent,
 		BasketComponent,
 		IngredientCreationComponent,
-		UserSignComponent
+		UserSignComponent,
+		CreateMealComponent
 	],
 	imports: [
 		BrowserModule,
@@ -60,7 +64,10 @@ import {UserSignComponent} from './utilty-components/user-sign/user-sign.compone
 		HttpClientModule,
 		Ng2ImgMaxModule
 	],
-	providers: [DataProviderService, IngredientsService, MealBasketService, ImageService, ConversionsUtil],
+	providers: [
+		{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+		{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
+		DataProviderService, IngredientsService, MealBasketService, ImageService, ConversionsUtil],
 	bootstrap: [AppComponent],
 	entryComponents: [DiaryAddComponent, IngredientCreationComponent]
 })

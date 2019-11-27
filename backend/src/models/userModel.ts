@@ -1,5 +1,6 @@
-import {Document, Schema, Model, model, SchemaTypes} from 'mongoose';
-import {PersonalMealModel} from './mealRecipeModel';
+import {Document, Schema, Model, model, SchemaTypes, Types} from 'mongoose';
+import {IPersonalMeal, mealInstanceSchema, PersonalMealModel, personalMealSchema} from './mealRecipeModel';
+
 
 const UserSchema = new Schema({
 	name: {
@@ -24,22 +25,21 @@ const UserSchema = new Schema({
 		default: Date.now()
 	},
 	foodData: {
-		personalMeals: {
-			type: [SchemaTypes.ObjectId],
-			ref: PersonalMealModel.collection.collectionName
-		},
-		mealHistory: {
-			type: [SchemaTypes.ObjectId],
-			ref: PersonalMealModel.collection.collectionName
-		}
+		personalMeals: [personalMealSchema],
+		mealHistory: [mealInstanceSchema]
 	}
-});
+}, {strict: 'throw'});
 
 export interface IUserModel extends Document {
+	username: string;
 	name: string;
 	email: string;
 	password: string;
 	date: string;
+	foodData: {
+		personalMeals: IPersonalMeal[],
+		mealHistory: Types.ObjectId[]
+	};
 }
 
 export const UserModel: Model<IUserModel> = model<IUserModel>('user', UserSchema);

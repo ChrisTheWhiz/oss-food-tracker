@@ -2,10 +2,10 @@
 	<h2>Review your meal</h2>
 	<ul class="basket-container">
 		<li *ngFor="let item of basket">
-			<h4>{{item.foodName}}</h4>
+			<h4>{{item.description}}</h4>
 			<div class="quantity-preview">
 				<mat-form-field>
-					<mat-select [ngModel]="item.mealType">
+					<mat-select [ngModel]="item.kind">
 						<mat-option [value]="'breakfast'">Breakfast</mat-option>
 						<mat-option [value]="'lunch'">Lunch</mat-option>
 						<mat-option [value]="'dinner'">Dinner</mat-option>
@@ -22,8 +22,8 @@
 				<mat-form-field>
 					<input matInput type="number" autocomplete="off" [ngModel]="item.quantity.referenceQuantity">
 				</mat-form-field>
-				<img *ngIf="item.foodPicture"
-					 [src]="conversions.convertMongoBase64toHTMLBase64(item.foodPicture)" class="food-pic">
+				<img *ngIf="item.picture"
+					 [src]="conversions.convertMongoBase64toHTMLBase64(item.picture)" class="food-pic">
 				<span class="spacer"></span>
 				<button mat-button class="remove" (click)="removeItemFromBasket(item)">Remove</button>
 			</div>

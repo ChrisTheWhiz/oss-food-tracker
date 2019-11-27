@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
 	selector: 'app-unsure-of-card',
@@ -9,10 +10,16 @@ export class UnsureOfCardComponent implements OnInit {
 
 	status: any;
 
-	constructor() {
+	constructor(private httpClient: HttpClient) {
 	}
 
 	ngOnInit() {
 	}
 
+	getUserPersonalMeals() {
+		return this.httpClient.get('dashboard/meals')
+		.subscribe((response) => {
+			console.log(response);
+		});
+	}
 }

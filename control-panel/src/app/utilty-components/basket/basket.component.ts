@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MealBasketService} from '../../services/meal-basket.service';
-import {ActualFood, UNIT} from '../../models/ingredient';
+import {PersonalMeal, UNIT} from '../../models/ingredient';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ConversionsUtil} from '../../utils/conversions.util';
 
@@ -10,7 +10,7 @@ import {ConversionsUtil} from '../../utils/conversions.util';
 	styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
-	basket: ActualFood[];
+	basket: PersonalMeal[];
 	UNIT = UNIT;
 
 	constructor(
@@ -22,7 +22,7 @@ export class BasketComponent implements OnInit {
 		this.basket = this.basketService.getBasket();
 	}
 
-	removeItemFromBasket(item: ActualFood) {
+	removeItemFromBasket(item: PersonalMeal) {
 		this.basketService.removeItemFromBasket(item);
 	}
 }

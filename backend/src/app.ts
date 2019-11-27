@@ -30,12 +30,18 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+/* this is just for debugging */
+// app.use((req, res, next) => {
+// 	console.log(req.headers);
+// 	next();
+// });
+
 app.use(passport.initialize());
 app.use(passport.session());
 passportJwtConfig(passport); // TODO test if this can be written first
 
 app.use('/users', UserRoutes);
-app.use('/api', FdcRoutes);
+app.use('/api', passport.authenticate('jwt', {session: false}), FdcRoutes);
 app.use('/dashboard', passport.authenticate('jwt', {session: false}), DashboardRoutes);
 app.get('', (req, res) => {
 	res.send('Express is now working!');

@@ -17,7 +17,7 @@ export interface QuestionModel {
 
 const signInFormModel: QuestionModel[] = [
 	{
-		placeholder: 'JoeWithDough50',
+		placeholder: 'JoeDough50',
 		prefixIcon: 'emoji_people',
 		errorMessages: {required: 'No username provided'},
 		validators: [Validators.required], // TODO add validators for username/password
@@ -65,7 +65,7 @@ const signUpFormModel: QuestionModel[] = [
 		key: 'password2',
 	},
 	{
-		placeholder: 'JoeWithDough50',
+		placeholder: 'JoeDough50',
 		prefixIcon: 'account_circle',
 		errorMessages: {required: 'Field is missing'},
 		validators: [Validators.required],

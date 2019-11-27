@@ -1,0 +1,51 @@
+@import '../../../variables';
+
+.container {
+	background-color: mat-color($primary);
+	width: 95vw;
+	border-radius: 10px;
+	padding: 1rem 1rem 0 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-flow: row nowrap;
+
+
+	.form-container {
+		padding: 1rem;
+	}
+
+	.food-table-container {
+		padding: 1rem;
+	}
+
+	mat-checkbox {
+		display: block;
+		color: white;
+		margin-bottom: 0.5rem;
+	}
+
+	mat-form-field {
+		width: 100%;
+		margin-bottom: 0.5rem;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+		input {
+			color: white;
+		}
+
+		mat-icon {
+			color: white
+		}
+	}
+
+	button {
+		color: white;
+		background-color: $button-action-color;
+		margin: auto 1rem 1rem auto;
+
+
+	}
+}

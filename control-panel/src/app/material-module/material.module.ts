@@ -17,6 +17,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSortModule} from '@angular/material/sort';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const materialModules = [
 	MatButtonModule,
@@ -37,7 +38,8 @@ const materialModules = [
 	MatProgressSpinnerModule,
 	MatSortModule,
 	MatButtonToggleModule,
-	MatDialogModule
+	MatDialogModule,
+	MatCheckboxModule
 ];
 
 @NgModule({

@@ -47,11 +47,13 @@ export interface NutritionalData {
 	};
 }
 
-export interface ActualFood {
-	foodName: string;
+export interface PersonalMeal {
+	description: string;
+	favourite: boolean;
 	quantity: SubstanceNutrition;
-	mealType: string;
-	foodPicture?: string | ArrayBuffer;
+	kind: string;
+	picture?: string | ArrayBuffer;
+	ingredients: Ingredient[];
 }
 
 

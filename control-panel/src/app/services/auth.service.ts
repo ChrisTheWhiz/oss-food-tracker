@@ -42,6 +42,7 @@ export class AuthService {
 			map((response: { status: string, token?: string, user?: User, message?: string }) => {
 				// console.log(response.user);
 				if (response.user) {
+					response.user.jwt = response.token;
 					localStorage.setItem('currentUser', JSON.stringify(response.user));
 					this.currentUserSubject.next(response.user);
 					this.createBeenLoggedEntryInLocalStorage();
@@ -61,11 +62,12 @@ export class AuthService {
 	register(newUser: User) {
 		return this.httpClient.post('/users/register', newUser)
 		.pipe(
-			map((response: { status: string, user: User, message: Array<{ msg: string }> }) => {
+			map((response: { status: string, token: string, user: User, message: Array<{ msg: string }> }) => {
 				if (response.status !== 'success') {
 					// console.log(response);
 					return response;
 				} else {
+					response.user.jwt = response.token;
 					localStorage.setItem('currentUser', JSON.stringify(response.user));
 					this.currentUserSubject.next(response.user);
 					this.createBeenLoggedEntryInLocalStorage();
