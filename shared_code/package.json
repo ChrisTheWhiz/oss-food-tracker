@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^12.12.14",
     "dotenv": "^8.2.0"
   }
 }

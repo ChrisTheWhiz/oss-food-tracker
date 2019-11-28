@@ -4,14 +4,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoginMockComponent} from './mocks/login-mock/login-mock.component';
 import {MaterialModule} from './material-module/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DiarySummaryMockComponent} from './mocks/diary-summary-mock/diary-summary-mock.component';
 import {ChartsModule} from 'ng2-charts';
-import {HistoryViewerMockComponent} from './mocks/history-viewer-mock/history-viewer-mock.component';
-import {FoodAddMockComponent} from './mocks/food-add-mock/food-add-mock.component';
-import {PeriodSummaryMockComponent} from './mocks/period-summary-mock/period-summary-mock.component';
 import {TodayPageComponent} from './main-pages/today-page/today-page.component';
 import {NutritionSummaryDashComponent} from './utilty-components/nutrition-summary-dash/nutrition-summary-dash.component';
 import {DataProviderService} from './services/data-provider.service';
@@ -19,7 +14,7 @@ import {HistoryChartComponent} from './utilty-components/history-chart/history-c
 import {UnsureOfCardComponent} from './utilty-components/unsure-of-card/unsure-of-card.component';
 import {DiaryAddComponent} from './utilty-components/diary-add/diary-add.component';
 import {FoodTableComponent} from './utilty-components/food-table/food-table.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IngredientsService} from './services/ingredients.service';
 import {IngredientEditorComponent} from './utilty-components/ingredient-editor/ingredient-editor.component';
 import {BasketComponent} from './utilty-components/basket/basket.component';
@@ -36,11 +31,6 @@ import {CreateMealComponent} from './utilty-components/create-meal/create-meal.c
 @NgModule({
 	declarations: [
 		AppComponent,
-		LoginMockComponent,
-		DiarySummaryMockComponent,
-		HistoryViewerMockComponent,
-		FoodAddMockComponent,
-		PeriodSummaryMockComponent,
 		TodayPageComponent,
 		NutritionSummaryDashComponent,
 		HistoryChartComponent,
