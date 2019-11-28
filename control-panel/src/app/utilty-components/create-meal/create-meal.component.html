@@ -1,18 +1,23 @@
 <div class="container">
 	<div class="form-container">
-	<form (ngSubmit)="onSubmit()" [formGroup]="mealForm">
-		<mat-form-field floatLabel="always" color="accent" *ngFor="let question of formModel">
-			<mat-label>{{question.label}}</mat-label>
-			<input matInput [type]="question.inputType" [formControlName]="question.key" [placeholder]="question.placeholder">
-			<mat-icon *ngIf="question.prefixIcon" matPrefix>{{question.prefixIcon}}</mat-icon>
-			<mat-error *ngIf="question.errorMessages">{{question.errorMessages[getControlError(question.key)]}}</mat-error>
-		</mat-form-field>
-		<mat-checkbox [formControlName]="'favourite'">Favourite</mat-checkbox>
-		<button mat-raised-button color="accent" type="submit">Create Meal</button>
-		<button mat-raised-button color="accent" type="button" (click)="addIngredient()">Add Ingredient</button>
-	</form>
+		<form (ngSubmit)="onSubmit()" [formGroup]="mealForm">
+			<mat-form-field floatLabel="always" color="accent" *ngFor="let question of formModel">
+				<mat-label>{{question.label}}</mat-label>
+				<input matInput [type]="question.inputType" [formControlName]="question.key" [placeholder]="question.placeholder">
+				<mat-icon *ngIf="question.prefixIcon" matPrefix>{{question.prefixIcon}}</mat-icon>
+				<mat-error *ngIf="question.errorMessages">{{question.errorMessages[getControlError(question.key)]}}</mat-error>
+			</mat-form-field>
+			<mat-checkbox [formControlName]="'favourite'">Favourite</mat-checkbox>
+			<button mat-raised-button color="accent" type="submit">Create Meal</button>
+		</form>
+		<ul class="ingredients-container">
+			<li *ngFor="let ingredient of ingredientsArr">
+				<p>{{ingredient.ingredientInstance.description}}</p>
+				<p>{{ingredient.quantity}} {{ingredient.servingType}}</p>
+			</li>
+		</ul>
 	</div>
 	<div class="food-table-container">
-		<app-food-table></app-food-table>
+		<app-food-table [addToBasketOrCreate]="'create'" (passItem)="addIngredient($event)"></app-food-table>
 	</div>
 </div>

@@ -40,7 +40,8 @@ export const personalMealSchema = new Schema({
 export const PersonalMealModel = model('PersonalMeal', personalMealSchema);
 
 
-export const mealInstanceSchema = new Schema({
+// todo IMealInstanceSchema
+export const mealInstanceSchema = new 	Schema({
 	meal: {
 		type: SchemaTypes.ObjectId,
 		ref: PersonalMealModel.collection.collectionName

@@ -38,7 +38,7 @@ export interface IUserModel extends Document {
 	date: string;
 	foodData: {
 		personalMeals: IPersonalMeal[],
-		mealHistory: Types.ObjectId[]
+		mealHistory: Types.ObjectId[] // TODO user IMealInstanceSchema
 	};
 }
 

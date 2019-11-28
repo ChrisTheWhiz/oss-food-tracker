@@ -20,7 +20,7 @@
 			</ul>
 		</div>
 		<form class="ingredient-config" (ngSubmit)="addIngredientToBasket()">
-			<mat-form-field>
+			<mat-form-field *ngIf="showMealField">
 				<mat-label>Meal</mat-label>
 				<mat-select [(ngModel)]="meal" name="mealType">
 					<mat-option [value]="'breakfast'">Breakfast</mat-option>

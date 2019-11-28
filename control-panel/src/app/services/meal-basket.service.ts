@@ -19,7 +19,7 @@ export class MealBasketService {
 		}
 	}
 
-	addToBasket(addIngredient: Ingredient, mealType: string, unit: UNIT, quantity: number, image?: string | ArrayBuffer) {
+	addToBasket(addIngredient: Ingredient, mealType?: string, unit?: UNIT, quantity?: number, image?: string | ArrayBuffer) {
 		// TODO check if the item was already added
 		const newIngredient: any = {
 			description: addIngredient.description,

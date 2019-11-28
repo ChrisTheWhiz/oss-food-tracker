@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {createMealModel} from './create-meal.model';
 import {QuestionModel} from './create-meal.model';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
 	selector: 'app-create-meal',
@@ -11,12 +12,15 @@ import {QuestionModel} from './create-meal.model';
 export class CreateMealComponent implements OnInit {
 	formModel: QuestionModel[];
 	mealForm: FormGroup;
+	ingredientsArr: any[] = [];
 
-	constructor(private fb: FormBuilder) {
+	constructor(
+		private fb: FormBuilder,
+		private httpClient: HttpClient) {
 	}
 
 	ngOnInit() {
-		this.formModel  = createMealModel.filter((question) => {
+		this.formModel = createMealModel.filter((question) => {
 			return !['checkbox', 'custom', 'file'].includes(question.inputType);
 		});
 		const controls = [];
@@ -26,7 +30,6 @@ export class CreateMealComponent implements OnInit {
 		this.mealForm = this.fb.group(controls);
 		this.mealForm.addControl('favourite', new FormControl(''));
 		this.mealForm.addControl('ingredients', this.fb.array([]));
-		console.log(this.ingredients);
 	}
 
 	getControlError(controlName: string): string | null {
@@ -39,15 +42,30 @@ export class CreateMealComponent implements OnInit {
 	}
 
 	onSubmit() {
-		console.log(this.mealForm.value);
+		// console.log(this.mealForm.value);
 		// this.mealForm.reset();
+		this.httpClient.post('/dashboard/meal', {
+			meal: {
+				...this.mealForm.value,
+				ingredients: this.ingredientsArr
+			}
+		})
+		.subscribe((resp) => {
+			console.log(resp);
+		});
 	}
 
 	get ingredients() {
 		return this.mealForm.controls.ingredients as FormArray;
 	}
-	addIngredient() {
-		this.ingredients.push(new FormControl(''));
-		console.log(this.ingredients);
+
+	addIngredient(item) {
+		// item = [this.ingredientInstance, this.meal, this.servingType, this.quantity, this.image];
+		this.ingredientsArr.push({
+			ingredientInstance: item[0],
+			servingType: item[2],
+			quantity: item[3]
+		});
+		console.log(this.ingredientsArr);
 	}
 }

@@ -11,8 +11,9 @@ import {ConversionsUtil} from '../../utils/conversions.util';
 	styleUrls: ['./ingredient-editor.component.scss']
 })
 export class IngredientEditorComponent implements OnInit {
-	@Output() itemAdded = new EventEmitter<string>();
+	@Output() itemAdded = new EventEmitter<any[]>();
 	@Input() ingredientInstance: Ingredient;
+	@Input() showMealField: boolean;
 
 	public pieChartLabels = ['Protein', 'Fat', 'Carbohydrates'];
 	public pieChartData: [number, number, number];
@@ -38,11 +39,7 @@ export class IngredientEditorComponent implements OnInit {
 	}
 
 	addIngredientToBasket() {
-		this.itemAdded.emit('ingredient_added_placeholder_description');
-		this.basketService.addToBasket(this.ingredientInstance, this.meal, this.servingType, this.quantity, this.image);
-	}
-
-	getRandomNumber() {
-		return Math.floor(Math.random() * 12);
+		const item = [this.ingredientInstance, this.meal, this.servingType, this.quantity, this.image];
+		this.itemAdded.emit(item);
 	}
 }

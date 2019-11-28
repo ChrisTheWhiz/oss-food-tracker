@@ -52,11 +52,13 @@ export function addMealInstances(req: Request, res: Response, next: NextFunction
 }
 
 export function createNewMeal(req: Request, res: Response, next: NextFunction) {
+	// console.log(req.body);
+	// res.send(req.body);
 	const user = req.user as IUserModel;
-	const meals = req.body.meals;
-	const a = UserModel.findOneAndUpdate({username: user.username}, {
+	const meal = req.body.meal;
+	UserModel.findOneAndUpdate({username: user.username}, {
 			$push: {
-				'foodData.personalMeals': meals[0]
+				'foodData.personalMeals': meal
 		}
 	})
 	.then((resp) => {
