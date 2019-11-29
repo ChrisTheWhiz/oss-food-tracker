@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MealBasketService} from '../../services/meal-basket.service';
-import {PersonalMeal, UNIT} from '../../models/ingredient';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ConversionsUtil} from '../../utils/conversions.util';
+import {UNIT} from "../../../../../shared_code/shared-enums";
+import {PersonalMeal} from '../../models/meal';
 
 @Component({
 	selector: 'app-basket',

@@ -1,7 +1,7 @@
 import {PassportStatic} from 'passport';
 import {ExtractJwt, Strategy as JwtStrategy} from 'passport-jwt';
 
-import {UserModel} from '../models/userModel';
+import {UserModel} from '../models/user';
 import {databaseConfig} from '../../../shared_code/network';
 
 

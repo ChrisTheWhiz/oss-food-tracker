@@ -1,6 +1,5 @@
 import {Router} from 'express';
 import {loginHandler, registrationHandler} from '../controllers/user';
-import {getUserMealsHistory, getUserPersonalMeals} from '../controllers/userMeals';
 
 
 const router = Router();

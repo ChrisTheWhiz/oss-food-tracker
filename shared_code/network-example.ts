@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-const result = dotenv.config({
+import {config} from 'dotenv';
+const result = config({
 	path: '../shared_code/.env'
 });
 if (result.error) {
@@ -14,7 +14,8 @@ export let databaseConfig: any;
 if (environment === 'development') {
 	networkConfig = {
 		port: '#port', // choose desired port for the backend
-		usdaKey: 'insert USDA key here' // you can obtain a key from https://fdc.nal.usda.gov/api-key-signup.html
+		usdaKey: 'insert USDA key here', // you can obtain a key from https://fdc.nal.usda.gov/api-key-signup.html
+		backendUrl: 'insert your backend server url' // most likely 'http://localhost
 	};
 
 	databaseConfig = {

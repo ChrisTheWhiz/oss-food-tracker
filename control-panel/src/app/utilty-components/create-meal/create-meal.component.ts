@@ -45,7 +45,7 @@ export class CreateMealComponent implements OnInit {
 		// console.log(this.mealForm.value);
 		// this.mealForm.reset();
 		this.httpClient.post('/dashboard/meal', {
-			meal: {
+			meals: {
 				...this.mealForm.value,
 				ingredients: this.ingredientsArr
 			}

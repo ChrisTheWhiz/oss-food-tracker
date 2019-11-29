@@ -1,5 +1,5 @@
-import {FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {Ingredient, SubstanceNutrition} from '../../models/ingredient';
+import {ValidatorFn, Validators} from '@angular/forms';
+import {Ingredient, SubstanceNutrition} from '../../../../../shared_code/shared-interfaces';
 
 
 export interface QuestionModel {

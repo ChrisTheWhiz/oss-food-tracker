@@ -2,7 +2,8 @@ import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, finalize} from 'rxjs/operators';
 import {IngredientsService} from './ingredients.service';
-import {Ingredient} from '../models/ingredient';
+import {Ingredient} from '../../../../shared_code/shared-interfaces';
+
 
 export class IngredientsDatasource implements DataSource<Ingredient> {
 

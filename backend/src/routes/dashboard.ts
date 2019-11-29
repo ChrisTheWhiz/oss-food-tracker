@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {addMealInstances, createNewMeal, getUserMealsHistory, getUserPersonalMeals} from '../controllers/userMeals';
+import {addToDiary, createNewMeal, getUserMealsHistory, getUserPersonalMeals} from '../controllers/food';
 
 
 const router = Router();
@@ -8,7 +8,7 @@ router.get('/meals', getUserPersonalMeals);
 
 router.get('/history', getUserMealsHistory);
 
-router.post('/meals', addMealInstances);
+router.post('/meals', addToDiary);
 
 router.post('/meal', createNewMeal);
 

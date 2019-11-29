@@ -2,15 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-
-interface User {
-	id: string; // TODO make this a proper ObjectId
-	name: string;
-	username: string;
-	email: string;
-	password: string;
-	jwt?: string;
-}
+import {User} from '../models/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -38,18 +30,18 @@ export class AuthService {
 
 	login(username: string, password: string) {
 		return this.httpClient.post<any>('/users/login', {usernameOrEmail: username, password})
-		.pipe(
-			map((response: { status: string, token?: string, user?: User, message?: string }) => {
-				// console.log(response.user);
-				if (response.user) {
-					response.user.jwt = response.token;
-					localStorage.setItem('currentUser', JSON.stringify(response.user));
-					this.currentUserSubject.next(response.user);
-					this.createBeenLoggedEntryInLocalStorage();
-				}
-				return response;
-			})
-		);
+			.pipe(
+				map((response: { status: string, token?: string, user?: User, message?: string }) => {
+					// console.log(response.user);
+					if (response.user) {
+						response.user.jwt = response.token;
+						localStorage.setItem('currentUser', JSON.stringify(response.user));
+						this.currentUserSubject.next(response.user);
+						this.createBeenLoggedEntryInLocalStorage();
+					}
+					return response;
+				})
+			);
 	}
 
 	logout() {
@@ -61,20 +53,20 @@ export class AuthService {
 
 	register(newUser: User) {
 		return this.httpClient.post('/users/register', newUser)
-		.pipe(
-			map((response: { status: string, token: string, user: User, message: Array<{ msg: string }> }) => {
-				if (response.status !== 'success') {
-					// console.log(response);
-					return response;
-				} else {
-					response.user.jwt = response.token;
-					localStorage.setItem('currentUser', JSON.stringify(response.user));
-					this.currentUserSubject.next(response.user);
-					this.createBeenLoggedEntryInLocalStorage();
-					return response;
-				}
-			})
-		);
+			.pipe(
+				map((response: { status: string, token: string, user: User, message: Array<{ msg: string }> }) => {
+					if (response.status !== 'success') {
+						// console.log(response);
+						return response;
+					} else {
+						response.user.jwt = response.token;
+						localStorage.setItem('currentUser', JSON.stringify(response.user));
+						this.currentUserSubject.next(response.user);
+						this.createBeenLoggedEntryInLocalStorage();
+						return response;
+					}
+				})
+			);
 	}
 
 	createBeenLoggedEntryInLocalStorage() {

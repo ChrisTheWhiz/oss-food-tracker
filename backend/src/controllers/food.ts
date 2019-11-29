@@ -1,27 +1,23 @@
 import {Response, Request, NextFunction} from 'express';
-import {PersonalMealModel} from '../models/mealRecipeModel';
-import {IUserModel, UserModel} from '../models/userModel';
+import {MealModel} from '../models/meal';
+import {IUserModel, UserModel} from '../models/user';
 import mongoose from 'mongoose';
+import {User} from '../../../shared_code/shared-interfaces';
 
 
 export function getUserPersonalMeals(req: Request, res: Response, next: NextFunction) {
-	// res.send({
-	// 	status: 'success',
-	// 	message: 'You are authenticated and have access to your meals', // TODO a real function
-	// 	user: req.user
-	// });
-	// const user = new UserModel(req.user);
-
-	// TODO fix this
-	// @ts-ignore
-	res.send(req.user!.foodData!.mealHistory);
+	const user = req.user as User;
+	const meals = user.foodData.personalMeals;
+	res.json(meals);
 }
 
 export function getUserMealsHistory(req: Request, res: Response, next: NextFunction) {
-
+	const user = req.user as User;
+	const mealHistory = user.foodData.diaryHistory;
+	res.json(mealHistory);
 }
 
-export function addMealInstances(req: Request, res: Response, next: NextFunction) {
+export function addToDiary(req: Request, res: Response, next: NextFunction) {
 	console.log(req.body);
 	const user = new UserModel(req.user);
 	const newMeals = req.body.meals;
@@ -29,8 +25,8 @@ export function addMealInstances(req: Request, res: Response, next: NextFunction
 	let resStatus = 'success';
 	newMeals.forEach((meal: any) => {
 		try {
-			const pendingMeal = new PersonalMealModel(meal);
-			user.foodData.mealHistory.push(meal);
+			const pendingMeal = new MealModel(meal);
+			user.foodData.diaryHistory.push(meal);
 			pendingMeal.save()
 			.then(() => { // TODO send list of meals to client for double-check
 			})
@@ -52,9 +48,7 @@ export function addMealInstances(req: Request, res: Response, next: NextFunction
 }
 
 export function createNewMeal(req: Request, res: Response, next: NextFunction) {
-	// console.log(req.body);
-	// res.send(req.body);
-	const user = req.user as IUserModel;
+	const user = req.user as User;
 	const meal = req.body.meal;
 	UserModel.findOneAndUpdate({username: user.username}, {
 			$push: {
@@ -62,7 +56,6 @@ export function createNewMeal(req: Request, res: Response, next: NextFunction) {
 		}
 	})
 	.then((resp) => {
-		// console.log(resp);
 		res.send(resp);
 	});
 }

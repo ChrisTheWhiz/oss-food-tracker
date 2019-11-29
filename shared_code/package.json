@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/dotenv": "^8.2.0",
+    "@types/mongoose": "^5.5.32",
     "@types/node": "^12.12.14",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.7.13",
+    "tslib": "^1.10.0"
   }
 }

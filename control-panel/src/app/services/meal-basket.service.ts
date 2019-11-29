@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-import {PersonalMeal, Ingredient, PLACEHOLDER_BASKET, UNIT} from '../models/ingredient';
+import {UNIT} from '../../../../shared_code/shared-enums';
+import {PersonalMeal} from '../models/meal';
+import {Ingredient} from '../../../../shared_code/shared-interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -28,7 +30,7 @@ export class MealBasketService {
 				referenceUnit: unit,
 				referenceQuantity: quantity
 			},
-			picture: image || addIngredient.image
+			image: image || addIngredient.image
 		};
 		this.basket.push(newIngredient);
 		localStorage.setItem('basket', this.localBasket = JSON.stringify(this.basket));

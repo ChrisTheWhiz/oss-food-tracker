@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Ingredient, UNIT} from '../../models/ingredient';
 import {ChartType} from 'chart.js';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MealBasketService} from '../../services/meal-basket.service';
 import {ConversionsUtil} from '../../utils/conversions.util';
+import {UNIT} from '../../../../../shared_code/shared-enums';
+import {Ingredient} from '../../../../../shared_code/shared-interfaces';
 
 @Component({
 	selector: 'app-ingredient-editor',
@@ -30,6 +31,8 @@ export class IngredientEditorComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		// TODO fix this if it's not fixed by itself during refactor
+		// @ts-ignore
 		this.pieChartData = this.calculatePercentages(this.ingredientInstance.nutrition[0].amount, this.ingredientInstance.nutrition[1].amount, this.ingredientInstance.nutrition[2].amount);
 	}
 
@@ -39,7 +42,7 @@ export class IngredientEditorComponent implements OnInit {
 	}
 
 	addIngredientToBasket() {
-		const item = [this.ingredientInstance, this.meal, this.servingType, this.quantity, this.image];
+		const item = [this.ingredientInstance, this.meals, this.servingType, this.quantity, this.image];
 		this.itemAdded.emit(item);
 	}
 }

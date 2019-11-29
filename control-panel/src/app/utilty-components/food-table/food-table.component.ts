@@ -2,11 +2,11 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {IngredientsDatasource} from '../../services/ingredients.datasource';
 import {IngredientsService} from '../../services/ingredients.service';
 import {ActivatedRoute} from '@angular/router';
-import {Ingredient} from '../../models/ingredient';
-import {TABLE_MODES} from '../../models/ingredient';
 import {ConversionsUtil} from '../../utils/conversions.util';
 import {MealBasketService} from '../../services/meal-basket.service';
 import {HttpClient} from '@angular/common/http';
+import {TABLE_MODES} from '../../models/enums';
+import {Ingredient} from '../../../../../shared_code/shared-interfaces';
 
 @Component({
 	selector: 'app-food-table',

@@ -2,7 +2,8 @@ import {Request, Response, Router} from 'express';
 import mongoose from 'mongoose';
 import request from 'request';
 import {getNutrientsFromFdcResponse} from '../controllers/fdcUtils';
-import {IngredientModel} from '../models/ingredientModel';
+import {IngredientModel} from '../models/ingredient';
+import {INGREDIENT_SOURCES} from '../../../shared_code/shared-enums';
 
 
 const router = Router();
@@ -70,11 +71,8 @@ function getIngredientInFDC(req: Request, res: Response) {
 	request(`https://api.nal.usda.gov/fdc/v1/${fdcId}?api_key=yhVOnrtGXAQDUA6CTSOw4fB4VE6x2Q09g0SFrikv`, {json: true}, (err, resp, body) => {
 		const newIngredient = new IngredientModel({
 			description: body.description,
-			fdcData: {
-				source: body.foodClass,
-				fdcId: body.fdcId
-				// TODO add more stuff here
-			},
+			source: INGREDIENT_SOURCES.SURVEY,
+			fdcId: body.fdcId,
 			nutrition: getNutrientsFromFdcResponse(body.foodNutrients)
 		});
 		res.json({payload: newIngredient});

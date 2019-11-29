@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import {Request, Response} from 'express';
 import {sign} from 'jsonwebtoken';
 import {databaseConfig} from '../../../shared_code/network';
-import {UserModel} from '../models/userModel';
+import {UserModel} from '../models/user';
 
 
 export const registrationHandler = (req: Request, res: Response) => {
