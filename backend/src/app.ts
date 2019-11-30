@@ -5,7 +5,7 @@ import passport from 'passport';
 import {databaseConfig, networkConfig} from '../../shared_code/network';
 import {passportJwtConfig} from './config/passport';
 import {DashboardRoutes} from './routes/dashboard';
-import {FdcRoutes} from './routes/fdc';
+import {FdcRoutes} from './routes/ingredient';
 import {UserRoutes} from './routes/user';
 
 // Passport config

@@ -33,7 +33,7 @@
 				<tr mat-header-row *matHeaderRowDef="consideredDisplayedColumns"></tr>
 				<tr mat-row *matRowDef="let row; columns: consideredDisplayedColumns;"
 				(click)="selectIngredientForPreview(row.fdcId)"
-				[class.active]="row.fdcId === previewedIngredient?.fdcData.fdcId"
+				[class.active]="row.fdcId === previewedIngredient?.fdcId"
 				></tr>
 			</table>
 			<mat-spinner *ngIf="ingredientsAreLoading" diameter="150" color="accent"></mat-spinner>
@@ -66,6 +66,6 @@
 		</div>
 	</div>
 	<div class="break"></div>
-	<button *ngIf="!ingredientAdditionisLoading" mat-raised-button (click)="addIngredientToLocal(previewedIngredient.fdcData.fdcId, base64img)" [disabled]="!previewedIngredient">Add Ingredient	</button>
-	<mat-spinner *ngIf="ingredientAdditionisLoading" diameter="36" color="accent"></mat-spinner>
+	<button *ngIf="!ingredientAdditionsLoading" mat-raised-button (click)="addIngredientToLocal(previewedIngredient.fdcId, base64img)" [disabled]="!previewedIngredient">Add Ingredient	</button>
+	<mat-spinner *ngIf="ingredientAdditionsLoading" diameter="36" color="accent"></mat-spinner>
 </div>

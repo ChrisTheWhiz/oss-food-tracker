@@ -42,7 +42,7 @@ export class IngredientEditorComponent implements OnInit {
 	}
 
 	addIngredientToBasket() {
-		const item = [this.ingredientInstance, this.meals, this.servingType, this.quantity, this.image];
+		const item = [this.ingredientInstance, this.meal, this.servingType, this.quantity, this.image];
 		this.itemAdded.emit(item);
 	}
 }

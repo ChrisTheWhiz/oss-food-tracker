@@ -11,5 +11,3 @@ export function resizeImage(path: string, width = 500, height = 300) {
 	const writeStream = fs.createWriteStream(path + '-out');
 	readStream.pipe(transform).pipe(writeStream);
 }
-
-resizeImage('aaa');

@@ -29,8 +29,8 @@ export const ingredientSchema = new Schema({
 			id: Number,
 			name: String,
 			unitName: {
-				type: String,
-				enum: Object.keys(UNIT)
+				type: String
+				// enum: Object.keys(UNIT) todo fix this, maybe create an additional enum
 			},
 			amount: Number
 		}],

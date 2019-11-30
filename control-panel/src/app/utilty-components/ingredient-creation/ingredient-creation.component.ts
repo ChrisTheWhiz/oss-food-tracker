@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ImageService} from '../../services/image.service';
 import {Ng2ImgMaxService} from 'ng2-img-max';
 import {DomSanitizer} from '@angular/platform-browser';
 import {IngredientsService} from '../../services/ingredients.service';
+import {Ingredient} from '../../../../../shared_code/shared-interfaces';
 
 
 @Component({
@@ -12,20 +12,20 @@ import {IngredientsService} from '../../services/ingredients.service';
 })
 export class IngredientCreationComponent implements OnInit {
 	base64img: string | ArrayBuffer;
-	message: 'uninitiliazezd';
+	message: 'uninitialized';
 	consideredIngredients: any[];
 	consideredDisplayedColumns = ['fdcId', 'description', 'score'];
-	previewedIngredient: any;
+	previewedIngredient: Ingredient | null;
 	previewedDisplayedColumns = ['name', 'amount', 'unitName'];
 	ingredientsAreLoading = true;
 	nutritionIsLoading = false;
-	ingredientAdditionisLoading = false;
+	ingredientAdditionsLoading = false;
 
 	ngOnInit() {
 		this.submitForm('');
 	}
 
-	constructor(private imageService: ImageService, private ng2ImgMax: Ng2ImgMaxService, private sanitizer: DomSanitizer, private ingredientsService: IngredientsService) {
+	constructor(private ng2ImgMax: Ng2ImgMaxService, private sanitizer: DomSanitizer, private ingredientsService: IngredientsService) {
 	}
 
 	onImageChange(event) {
@@ -42,10 +42,6 @@ export class IngredientCreationComponent implements OnInit {
 					} else {
 						throw new Error('Reading new ingredient image failed in ingredient-creation.components.ts');
 					}
-					this.imageService.uploadImage(this.base64img)
-					.subscribe((next) => {
-						this.message = next;
-					});
 				};
 
 			},
@@ -59,7 +55,7 @@ export class IngredientCreationComponent implements OnInit {
 		this.consideredIngredients = [];
 		this.previewedIngredient = null;
 		this.ingredientsAreLoading = true;
-		this.ingredientsService.findIngredientsInFdc(description)
+		this.ingredientsService.fdcIngredientSearch(description)
 		.subscribe((response) => {
 			if (response.length === 0) {
 				this.consideredIngredients = [{
@@ -76,9 +72,9 @@ export class IngredientCreationComponent implements OnInit {
 	}
 
 	selectIngredientForPreview(fdcId: string) {
-		this.previewedIngredient = undefined;
+		this.previewedIngredient = null;
 		this.nutritionIsLoading = true;
-		this.ingredientsService.getFdcIngredient(fdcId)
+		this.ingredientsService.fdcGetIngredient(fdcId)
 		.subscribe((response) => {
 			this.previewedIngredient = response;
 			this.nutritionIsLoading = false;
@@ -86,14 +82,14 @@ export class IngredientCreationComponent implements OnInit {
 	}
 
 	addIngredientToLocal(fdcId: string, image?: string | ArrayBuffer) {
-		this.ingredientAdditionisLoading = true;
-		this.ingredientsService.addFdcIngredientToLocal(fdcId, image)
+		this.ingredientAdditionsLoading = true;
+		this.ingredientsService.fdcGetIngredientLocalAddIngredient(fdcId, image)
 		.subscribe((response) => {
 			this.message = response;
 			if (!response.error) {
-				this.previewedIngredient = undefined;
+				this.previewedIngredient = null;
 			}
-			this.ingredientAdditionisLoading = false;
+			this.ingredientAdditionsLoading = false;
 		});
 	}
 }

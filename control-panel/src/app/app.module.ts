@@ -20,7 +20,6 @@ import {IngredientEditorComponent} from './utilty-components/ingredient-editor/i
 import {BasketComponent} from './utilty-components/basket/basket.component';
 import {MealBasketService} from './services/meal-basket.service';
 import {IngredientCreationComponent} from './utilty-components/ingredient-creation/ingredient-creation.component';
-import {ImageService} from './services/image.service';
 import {Ng2ImgMaxModule} from 'ng2-img-max';
 import {ConversionsUtil} from './utils/conversions.util';
 import {UserSignComponent} from './utilty-components/user-sign/user-sign.component';
@@ -57,7 +56,7 @@ import {CreateMealComponent} from './utilty-components/create-meal/create-meal.c
 	providers: [
 		{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
-		DataProviderService, IngredientsService, MealBasketService, ImageService, ConversionsUtil],
+		DataProviderService, IngredientsService, MealBasketService, ConversionsUtil],
 	bootstrap: [AppComponent],
 	entryComponents: [DiaryAddComponent, IngredientCreationComponent]
 })

@@ -28,7 +28,7 @@ export class IngredientsDatasource implements DataSource<Ingredient> {
 
 		this.loadingSubject.next(true);
 
-		this.ingredientService.findAllIngredients()
+		this.ingredientService.localGetIngredients()
 		.pipe(
 			catchError(() => of([])),
 			finalize(() => this.loadingSubject.next(false))
