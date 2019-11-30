@@ -25,6 +25,10 @@ const UserSchema = new Schema({
 		type: Date,
 		default: Date.now()
 	},
+	mealTimes: {
+		type: [String],
+		default: ['Breakfast', 'Lunch', 'Dinner', 'Snack']
+	},
 	foodData: {
 		personalMeals: [mealSchema],
 		diaryHistory: [foodInstanceSchema],

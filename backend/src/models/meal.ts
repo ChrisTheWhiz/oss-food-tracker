@@ -41,7 +41,8 @@ export const foodInstanceSchema = new Schema({
 		type: Date,
 		default: Date.now()
 	},
-	meal: {
+	mealTime: String,
+	food: {
 		type: SchemaTypes.ObjectId,
 		refPath: 'foodType'
 	}

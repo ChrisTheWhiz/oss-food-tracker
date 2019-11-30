@@ -54,7 +54,7 @@
 				<ng-container matColumnDef="expandedDetail">
 					<td mat-cell *matCellDef="let ingredient" [attr.colspan]="displayedColumns.length">
 						<app-ingredient-editor (itemAdded)="expandedIngredient = null; processItem($event)" *ngIf="expandedIngredient === ingredient"
-											   [ingredientInstance]="ingredient" [showMealField]="addToBasketOrCreate === 'basket'"
+                                               [ingredient]="ingredient" [showMealField]="addToBasketOrCreate === 'basket'"
 						></app-ingredient-editor>
 					</td>
 				</ng-container>

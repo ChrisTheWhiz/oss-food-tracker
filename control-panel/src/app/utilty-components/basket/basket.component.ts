@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MealBasketService} from '../../services/meal-basket.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ConversionsUtil} from '../../utils/conversions.util';
-import {UNIT} from "../../../../../shared_code/shared-enums";
-import {PersonalMeal} from '../../models/meal';
+import {UNIT} from '../../../../../shared_code/shared-enums';
+import {Meal} from '../../../../../shared_code/shared-interfaces';
 
 @Component({
 	selector: 'app-basket',
@@ -11,7 +11,7 @@ import {PersonalMeal} from '../../models/meal';
 	styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
-	basket: PersonalMeal[];
+	basket: Meal[];
 	UNIT = UNIT;
 
 	constructor(
@@ -23,7 +23,7 @@ export class BasketComponent implements OnInit {
 		this.basket = this.basketService.getBasket();
 	}
 
-	removeItemFromBasket(item: PersonalMeal) {
+	removeItemFromBasket(item: Meal) {
 		this.basketService.removeItemFromBasket(item);
 	}
 }

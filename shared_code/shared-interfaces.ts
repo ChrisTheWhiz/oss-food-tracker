@@ -50,8 +50,9 @@ export interface Meal {
 export interface FoodInstance {
 	foodType: 'Ingredient' | 'Meal';
 	quantity: number;
-	timeOfConsumption: Date
-	meal: Ingredient | Meal
+	timeOfConsumption: Date;
+	mealTime: string;
+	food: Ingredient | Meal;
 }
 
 export interface User {
@@ -60,6 +61,7 @@ export interface User {
 	email: string;
 	password: string;
 	accountCreated: Date;
+	mealTimes: string[];
 	jwt?: string; // for client purposes
 	foodData: {
 		// These are subdocuments

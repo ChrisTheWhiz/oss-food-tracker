@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {UNIT} from '../../../../shared_code/shared-enums';
-import {PersonalMeal} from '../models/meal';
-import {Ingredient} from '../../../../shared_code/shared-interfaces';
+import {Ingredient, Meal} from '../../../../shared_code/shared-interfaces';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class MealBasketService {
 
-	basket: PersonalMeal[];
+	basket: Meal[];
 	localBasket: string | null;
 
 	constructor() {
@@ -36,7 +35,7 @@ export class MealBasketService {
 		localStorage.setItem('basket', this.localBasket = JSON.stringify(this.basket));
 	}
 
-	removeItemFromBasket(foodToRemove: PersonalMeal) {
+	removeItemFromBasket(foodToRemove: Meal) {
 		this.basket.splice(this.basket.indexOf(foodToRemove), 1);
 		localStorage.setItem('basket', this.localBasket = JSON.stringify(this.basket));
 	}

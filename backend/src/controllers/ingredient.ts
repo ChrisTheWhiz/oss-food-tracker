@@ -80,9 +80,7 @@ export function fdcGetIngredientLocalAddIngredient(req: Request, res: Response) 
 		image = Buffer.from(image, 'base64');
 	}
 	request(`https://api.nal.usda.gov/fdc/v1/${fdcId}?api_key=yhVOnrtGXAQDUA6CTSOw4fB4VE6x2Q09g0SFrikv`, {json: true}, (err, resp, body) => {
-		console.log('kek');
 		const nutrients = getNutrientsFromFdcResponse(body.foodNutrients);
-		console.log('lel');
 		const newIngredient: Ingredient = {
 			kind: FOOD_KIND.INGREDIENT,
 			description: body.description,
@@ -90,7 +88,6 @@ export function fdcGetIngredientLocalAddIngredient(req: Request, res: Response) 
 			fdcId: body.fdcId,
 			nutrition: getNutrientsFromFdcResponse(body.foodNutrients)
 		};
-		console.log('lawl');
 		const newIngredientDoc = new IngredientModel(newIngredient);
 		newIngredientDoc.save()
 			.then((resp) => {
