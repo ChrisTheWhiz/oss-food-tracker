@@ -51,7 +51,7 @@ const UserSchema = new Schema({
 	}
 }, {strict: 'throw'});
 
-export interface IUserModel extends Document, User {
+export interface IUserModel extends Omit<User, '_id'>, Document  {
 }
 
-export const UserModel: Model<IUserModel> = model<IUserModel>('user', UserSchema);
+export const UserModel = model<IUserModel>('user', UserSchema);

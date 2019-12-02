@@ -23,6 +23,7 @@ export interface NutritionalData {
 }
 
 export interface Ingredient {
+	_id?: Types.ObjectId;
 	description: string;
 	image?: string | ArrayBuffer;
 	kind: FOOD_KIND.INGREDIENT;
@@ -36,26 +37,33 @@ export interface Ingredient {
 		amount: number
 	}];
 }
+
+export interface MealInstance {
+	ingredient: Ingredient;
+	quantity: number; // always in grams
+}
+
 export interface Meal {
+	_id?: Types.ObjectId;
 	description: string;
 	image?: string | ArrayBuffer;
 	kind: FOOD_KIND;
 
-	ingredients: [{
-		ingredient: Types.ObjectId[],
-		quantity: number	// always in grams
-	}];
+	ingredients: MealInstance[];
 }
 
 export interface FoodInstance {
+	_id?: Types.ObjectId;
 	foodType: 'Ingredient' | 'Meal';
 	quantity: number;
 	timeOfConsumption: Date;
 	mealTime: string;
-	food: Ingredient | Meal;
+	food: Types.ObjectId;
+	image?: string | ArrayBuffer;
 }
 
 export interface User {
+	_id?: Types.ObjectId;
 	username: string;
 	name: string;
 	email: string;

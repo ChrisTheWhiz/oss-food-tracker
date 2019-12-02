@@ -70,4 +70,22 @@
 
 
 	}
+
+	.image-upload {
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+
+		input {
+			width: 221px;
+			margin-bottom: 1rem;
+			color: white;
+		}
+
+		img {
+			border-radius: 20%;
+		}
+	}
+
 }

@@ -1,6 +1,6 @@
 import {Document, model, Schema, SchemaTypes} from 'mongoose';
 import {IngredientModel} from './ingredient';
-import {Ingredient} from '../../../shared_code/shared-interfaces';
+import {Meal} from '../../../shared_code/shared-interfaces';
 import {FOOD_KIND} from '../../../shared_code/shared-enums';
 
 export const mealSchema = new Schema({
@@ -26,7 +26,9 @@ export const mealSchema = new Schema({
 	}]
 }, {strict: 'throw'});
 
-export interface IMealModel extends Ingredient, Document {
+
+// @ts-ignore this one's actually fine the IDE is fussy
+export interface IMealModel extends Omit<Meal, '_id'>, Document {
 }
 
 export const MealModel = model<IMealModel>('PersonalMeal', mealSchema);
@@ -45,5 +47,9 @@ export const foodInstanceSchema = new Schema({
 	food: {
 		type: SchemaTypes.ObjectId,
 		refPath: 'foodType'
+	},
+	image: {
+		type: SchemaTypes.Buffer,
+		required: false
 	}
 }, {_id: false});

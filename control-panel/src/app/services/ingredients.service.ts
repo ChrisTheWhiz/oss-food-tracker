@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Ingredient} from '../../../../shared_code/shared-interfaces';
+import {Types} from 'mongoose';
 
 
 @Injectable()
@@ -36,5 +37,9 @@ export class IngredientsService {
 			.pipe(
 				map((res: any) => res.payload)
 			);
+	}
+
+	localGetIngredient(id: Types.ObjectId) {
+		return this.http.get<Ingredient>('/api/ingredient', {params: {id: id.toString()}});
 	}
 }

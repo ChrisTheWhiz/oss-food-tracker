@@ -39,15 +39,6 @@ export const createMealModel: QuestionModel[] = [
 		key: 'favourite',
 	},
 	{
-		placeholder: '123',
-		prefixIcon: 'exposure_plus_1',
-		errorMessages: {quantity: 'No quantity provided'},
-		validators: [Validators.required],
-		inputType: 'number',
-		label: 'Quantity',
-		key: 'quantity',
-	},
-	{
 		value: 'recipe',
 		prefixIcon: 'account_circle',
 		inputType: 'select',

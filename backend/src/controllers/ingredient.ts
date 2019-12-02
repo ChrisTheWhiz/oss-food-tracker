@@ -8,7 +8,7 @@ import {getNutrientsFromFdcResponse} from '../utils/fdcUtils';
 export function localGetIngredients(req: Request, res: Response) {
 	const ingredientQuery = req.query.id ? {id: req.query.id} : {};
 	IngredientModel.find(ingredientQuery).lean()
-		.then((result) => {
+		.then((result: any) => {
 			res.json({payload: result});
 		});
 }
@@ -63,6 +63,7 @@ export function fdcGetIngredient(req: Request, res: Response) {
 export function manuallyAddIngredientToLocal(req: Request, res: Response) {
 	const body = req.body;
 	const newIngredient = new IngredientModel(body.newIngredient);
+	// @ts-ignore
 	newIngredient.save((err, product) => {
 		if (err) {
 			console.log(err);
@@ -90,15 +91,23 @@ export function fdcGetIngredientLocalAddIngredient(req: Request, res: Response) 
 		};
 		const newIngredientDoc = new IngredientModel(newIngredient);
 		newIngredientDoc.save()
-			.then((resp) => {
+			.then((resp: Ingredient) => {
 				res.json({
 					status: 'success',
 					message: resp
 				});
 			})
-			.catch((e) => {
+			.catch((e: Error) => {
 				console.log(e);
 				res.send('error :(');
 			});
 	});
+}
+
+export function localGetIngredient(req: Request, res: Response) {
+	const id = req.query.id;
+	let ingredient = IngredientModel.findById(id).lean()
+		.then((result: Ingredient) => {
+			res.send(result);
+		});
 }

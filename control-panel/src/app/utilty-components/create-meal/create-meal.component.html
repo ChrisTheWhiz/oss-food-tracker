@@ -3,19 +3,32 @@
 		<form (ngSubmit)="onSubmit()" [formGroup]="mealForm">
 			<mat-form-field floatLabel="always" color="accent" *ngFor="let question of formModel">
 				<mat-label>{{question.label}}</mat-label>
-				<input matInput [type]="question.inputType" [formControlName]="question.key" [placeholder]="question.placeholder">
+				<input matInput [type]="question.inputType" [formControlName]="question.key"
+					   [placeholder]="question.placeholder">
 				<mat-icon *ngIf="question.prefixIcon" matPrefix>{{question.prefixIcon}}</mat-icon>
-				<mat-error *ngIf="question.errorMessages">{{question.errorMessages[getControlError(question.key)]}}</mat-error>
+				<mat-error
+					*ngIf="question.errorMessages">{{question.errorMessages[getControlError(question.key)]}}</mat-error>
+			</mat-form-field>
+			<mat-form-field>
+				<mat-label>Meal or Recipe</mat-label>
+				<mat-select [formControlName]="'kind'">
+					<mat-option value="recipe">Recipe</mat-option>
+					<mat-option value="meal">Meal</mat-option>
+				</mat-select>
 			</mat-form-field>
 			<mat-checkbox [formControlName]="'favourite'">Favourite</mat-checkbox>
+			<div class="image-upload">
+				<input type="file" (change)="onImageChange($event)" accept="image/*">
+				<img *ngIf="base64img" [src]="sanitizer.bypassSecurityTrustUrl(base64img)">
+			</div>
+			<ul class="ingredients-container">
+				<li *ngFor="let ingredientInstance of ingredientsArr">
+					<p>{{ingredientInstance.ingredient.description}}</p>
+					<p>{{ingredientInstance.quantity}} grams</p>
+				</li>
+			</ul>
 			<button mat-raised-button color="accent" type="submit">Create Meal</button>
 		</form>
-		<ul class="ingredients-container">
-			<li *ngFor="let ingredient of ingredientsArr">
-				<p>{{ingredient.ingredientInstance.description}}</p>
-				<p>{{ingredient.quantity}} {{ingredient.servingType}}</p>
-			</li>
-		</ul>
 	</div>
 	<div class="food-table-container">
 		<app-food-table [addToBasketOrCreate]="'create'" (passItem)="addIngredient($event)"></app-food-table>

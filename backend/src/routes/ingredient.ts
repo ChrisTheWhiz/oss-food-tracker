@@ -1,10 +1,10 @@
 import {Router} from 'express';
 import {
+	fdcGetIngredient,
 	fdcGetIngredientLocalAddIngredient,
 	fdcIngredientSearch,
-	localGetIngredients,
-	fdcGetIngredient,
-	manuallyAddIngredientToLocal
+	localGetIngredient,
+	localGetIngredients
 } from '../controllers/ingredient';
 
 
@@ -18,5 +18,7 @@ router.get('/fdc/ingredient/:fdcId', fdcGetIngredient);
 router.post('/fdc/addIng/:id', fdcGetIngredientLocalAddIngredient);
 
 router.get('/ingredients', localGetIngredients);
+
+router.get('/ingredient', localGetIngredient);
 
 export {router as FdcRoutes};

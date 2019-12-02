@@ -6,7 +6,7 @@ import {ConversionsUtil} from '../../utils/conversions.util';
 import {MealBasketService} from '../../services/meal-basket.service';
 import {HttpClient} from '@angular/common/http';
 import {TABLE_MODES} from '../../models/enums';
-import {Ingredient} from '../../../../../shared_code/shared-interfaces';
+import {FoodInstance, Ingredient} from '../../../../../shared_code/shared-interfaces';
 
 @Component({
 	selector: 'app-food-table',
@@ -22,7 +22,7 @@ export class FoodTableComponent implements OnInit {
 	tableMode: TABLE_MODES;
 
 	@Input() addToBasketOrCreate: string;
-	@Output() passItem = new EventEmitter<any[]>();
+	@Output() passItem = new EventEmitter<FoodInstance>();
 
 
 	constructor(
@@ -39,10 +39,9 @@ export class FoodTableComponent implements OnInit {
 		this.tableMode = TABLE_MODES.favourites;
 	}
 
-	processItem(item) {
-		// item = [this.ingredientInstance, this.meal, this.servingType, this.quantity, this.image];
+	processItem(item: FoodInstance) {
 		if (this.addToBasketOrCreate === 'basket') {
-			this.basketService.addToBasket(item[0], item[1], item[2], item[3], item[4]);
+			this.basketService.addToBasket(item);
 		} else if (this.addToBasketOrCreate === 'create') {
 			this.passItem.emit(item);
 		}

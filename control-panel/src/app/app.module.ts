@@ -26,6 +26,7 @@ import {UserSignComponent} from './utilty-components/user-sign/user-sign.compone
 import {AuthInterceptorService} from './services/auth-interceptor.service';
 import {ErrorInterceptorService} from './services/error-interceptor.service';
 import {CreateMealComponent} from './utilty-components/create-meal/create-meal.component';
+import {MealService} from './services/meal.service';
 
 @NgModule({
 	declarations: [
@@ -56,7 +57,7 @@ import {CreateMealComponent} from './utilty-components/create-meal/create-meal.c
 	providers: [
 		{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
-		DataProviderService, IngredientsService, MealBasketService, ConversionsUtil],
+		DataProviderService, IngredientsService, MealBasketService, ConversionsUtil, MealService],
 	bootstrap: [AppComponent],
 	entryComponents: [DiaryAddComponent, IngredientCreationComponent]
 })

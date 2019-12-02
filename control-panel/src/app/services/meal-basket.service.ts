@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
-import {UNIT} from '../../../../shared_code/shared-enums';
-import {Ingredient, Meal} from '../../../../shared_code/shared-interfaces';
+import {FoodInstance} from '../../../../shared_code/shared-interfaces';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class MealBasketService {
 
-	basket: Meal[];
+	basket: FoodInstance[];
 	localBasket: string | null;
 
 	constructor() {
@@ -20,22 +19,13 @@ export class MealBasketService {
 		}
 	}
 
-	addToBasket(addIngredient: Ingredient, mealType?: string, unit?: UNIT, quantity?: number, image?: string | ArrayBuffer) {
+	addToBasket(food: FoodInstance) {
 		// TODO check if the item was already added
-		const newIngredient: any = {
-			description: addIngredient.description,
-			kind: mealType,
-			quantity: {
-				referenceUnit: unit,
-				referenceQuantity: quantity
-			},
-			image: image || addIngredient.image
-		};
-		this.basket.push(newIngredient);
+		this.basket.push(food);
 		localStorage.setItem('basket', this.localBasket = JSON.stringify(this.basket));
 	}
 
-	removeItemFromBasket(foodToRemove: Meal) {
+	removeItemFromBasket(foodToRemove: FoodInstance) {
 		this.basket.splice(this.basket.indexOf(foodToRemove), 1);
 		localStorage.setItem('basket', this.localBasket = JSON.stringify(this.basket));
 	}

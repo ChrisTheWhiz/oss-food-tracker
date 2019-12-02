@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MealBasketService} from '../../services/meal-basket.service';
 import {ConversionsUtil} from '../../utils/conversions.util';
 import {UNIT} from '../../../../../shared_code/shared-enums';
-import {Ingredient} from '../../../../../shared_code/shared-interfaces';
+import {FoodInstance, Ingredient} from '../../../../../shared_code/shared-interfaces';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Types} from 'mongoose';
 
 @Component({
 	selector: 'app-ingredient-editor',
@@ -13,7 +14,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class IngredientEditorComponent implements OnInit {
 
-	@Output() itemAdded = new EventEmitter<any[]>();
+	@Output() itemAdded = new EventEmitter<FoodInstance>();
 	@Input() ingredient: Ingredient;
 	@Input() showMealField: boolean;
 
@@ -41,7 +42,6 @@ export class IngredientEditorComponent implements OnInit {
 			quantity: new FormControl(''),
 			unit: new FormControl(this.UNIT[0])
 		});
-		console.log(this.showMealField);
 		if (this.showMealField) {
 			this.form.addControl('mealTime', new FormControl(this.mealTimes[0]));
 		}
@@ -49,14 +49,20 @@ export class IngredientEditorComponent implements OnInit {
 		this.pieChartConfig.pieChartData = this.calculatePercentages(this.ingredient.nutrition[0].amount, this.ingredient.nutrition[1].amount, this.ingredient.nutrition[2].amount);
 	}
 
+	// TODO make this more readable
 	calculatePercentages(gramsOfProtein: number, gramsOfFat: number, gramsOfCarbo: number): [number, number, number] {
 		const sum = gramsOfProtein + gramsOfFat + gramsOfCarbo;
 		return [Math.round(gramsOfProtein / sum * 100), Math.round(gramsOfFat / sum * 100), Math.round(gramsOfCarbo / sum * 100)];
 	}
 
 	passIngredientUpwards() {
-		const item = [this.ingredient, 'placeholder - what does this do?', this.servingType, this.quantity, this.image];
-		this.itemAdded.emit(item);
+		this.itemAdded.emit({
+			foodType: 'Ingredient',
+			quantity: this.conversions.convertQuantityToGrams(this.form.controls.quantity.value, this.form.controls.unit.value),
+			timeOfConsumption: new Date(),
+			mealTime: this.form.controls.mealTime ? this.form.controls.mealTime.value : 'N/A',
+			food: this.ingredient._id!
+		});
 	}
 
 	get UNIT() {
