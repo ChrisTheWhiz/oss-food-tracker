@@ -59,7 +59,7 @@ import {MealService} from './services/meal.service';
 		{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
 		DataProviderService, IngredientsService, MealBasketService, ConversionsUtil, MealService],
 	bootstrap: [AppComponent],
-	entryComponents: [DiaryAddComponent, IngredientCreationComponent]
+	entryComponents: [DiaryAddComponent, IngredientCreationComponent, CreateMealComponent]
 })
 export class AppModule {
 }

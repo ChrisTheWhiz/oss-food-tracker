@@ -4,6 +4,7 @@ import {ChartType} from 'chart.js';
 import {MatDialog} from '@angular/material';
 import {DiaryAddComponent} from '../diary-add/diary-add.component';
 import {IngredientCreationComponent} from '../ingredient-creation/ingredient-creation.component';
+import {CreateMealComponent} from '../create-meal/create-meal.component';
 
 @Component({
 	selector: 'app-nutrition-summary-dash',
@@ -33,14 +34,14 @@ export class NutritionSummaryDashComponent implements OnInit {
 
 	updateData() {
 		return this.dataProvider.getTodayData()
-		.subscribe((data) => {
-			this.nutritionData = data;
-			this.pieChartData = [
-				this.nutritionData.calorieData.macros.protein,
-				this.nutritionData.calorieData.macros.fat,
-				this.nutritionData.calorieData.macros.carbohydrates
-			];
-		});
+			.subscribe((data) => {
+				this.nutritionData = data;
+				this.pieChartData = [
+					this.nutritionData.calorieData.macros.protein,
+					this.nutritionData.calorieData.macros.fat,
+					this.nutritionData.calorieData.macros.carbohydrates
+				];
+			});
 	}
 
 	openMealDialog() {
@@ -54,6 +55,13 @@ export class NutritionSummaryDashComponent implements OnInit {
 		const dialogRef = this.dialog.open(IngredientCreationComponent, {
 			// panelClass: ['mat-elevation-z8'],
 			// height: '90vh'
+		});
+	}
+
+	openMealCreationDialog() {
+		const dialogRef = this.dialog.open(CreateMealComponent, {
+			panelClass: ['add-food-dialog', 'mat-elevation-z8'],
+			maxHeight: '90vh'
 		});
 	}
 
