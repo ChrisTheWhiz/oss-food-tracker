@@ -7,7 +7,8 @@ import {UserSignComponent} from './utilty-components/user-sign/user-sign.compone
 const routes: Routes = [
 	{path: 'today', component: TodayPageComponent, pathMatch: 'full', canActivate: [AuthGuardService]},
 	{path: 'login', component: UserSignComponent, pathMatch: 'full', outlet: 'modal'},
-	{path: '*', redirectTo: ''}
+	{path: '', redirectTo: 'today', pathMatch: 'full'},
+	{path: '**', redirectTo: 'today', pathMatch: 'full'}
 ];
 
 @NgModule({

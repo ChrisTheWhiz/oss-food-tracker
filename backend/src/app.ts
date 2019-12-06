@@ -38,7 +38,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(passport.initialize());
 app.use(passport.session());
-passportJwtConfig(passport); // TODO test if this can be written first
+passportJwtConfig(passport);
 
 app.use('/users', UserRoutes);
 app.use('/api', passport.authenticate('jwt', {session: false}), FdcRoutes);

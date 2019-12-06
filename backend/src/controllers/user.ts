@@ -97,7 +97,7 @@ export const loginHandler = (req: Request, res: Response) => {
 						message: 'wrong password'
 					});
 				} else {
-					const token = sign(user, databaseConfig.secret, {expiresIn: 60480});
+					const token = sign(user, databaseConfig.secret);
 					// console.log(user);
 					res.send({
 						status: 'success',
