@@ -43,9 +43,10 @@ passportJwtConfig(passport);
 app.use('/users', UserRoutes);
 app.use('/api', passport.authenticate('jwt', {session: false}), FdcRoutes);
 app.use('/dashboard', passport.authenticate('jwt', {session: false}), DashboardRoutes);
-app.get('', (req, res) => {
-	res.send('Express is now working!');
-});
+app.use(express.static('dist'));
+// app.get('', (req, res) => {
+// 	res.send('Express is now working!');
+// });
 
 app.listen(networkConfig.port, () => {
 	console.log('App listening on port ' + networkConfig.port);

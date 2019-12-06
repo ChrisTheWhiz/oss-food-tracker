@@ -5,7 +5,6 @@ import {UNIT} from '../../../../../shared_code/shared-enums';
 import {FoodInstance, Ingredient} from '../../../../../shared_code/shared-interfaces';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Types} from 'mongoose';
 
 @Component({
 	selector: 'app-ingredient-editor',

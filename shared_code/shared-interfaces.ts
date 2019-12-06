@@ -35,7 +35,25 @@ export interface Ingredient {
 		name: string,
 		unitName: UNIT,
 		amount: number
-	}];
+		},
+		{
+			id: number,
+			name: string,
+			unitName: UNIT,
+			amount: number
+		},
+		{
+			id: number,
+			name: string,
+			unitName: UNIT,
+			amount: number
+		},
+		{
+			id: number,
+			name: string,
+			unitName: UNIT,
+			amount: number
+		}];
 }
 
 export interface MealInstance {
