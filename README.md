@@ -1,5 +1,5 @@
 ## THIS PROJECT IS NOT MAINTAINED ANYMORE 
-For now the project is **NOT** functional, but a few characteristics like adding ingredients to the global database and signing up and in can be tested.
+The project is **NOT** functional, but a few features like adding ingredients to the global database signing up and logging in can be worked with.
 
 To build the project you will need a USDA API key and a MongoDB database instance.
 
